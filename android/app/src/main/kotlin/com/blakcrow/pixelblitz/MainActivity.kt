@@ -1,4 +1,4 @@
-package com.bl4kcrow.pixelblitz_app
+package com.blakcrow.pixelblitz
 
 import io.flutter.embedding.android.FlutterActivity
 
