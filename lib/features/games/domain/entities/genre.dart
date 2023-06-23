@@ -19,4 +19,9 @@ class Genre {
         name: name ?? this.name,
         slug: slug ?? this.slug,
       );
+  
+  @override
+  String toString() {
+    return name;
+  }
 }

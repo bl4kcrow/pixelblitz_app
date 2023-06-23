@@ -26,6 +26,7 @@ class RawgGamesDatasource implements GamesDatasource {
         'discover': true,
         'ordering': '-relevance',
         'page': page,
+        'page_size': 10,
       },
     );
 

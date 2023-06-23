@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'core/routes/routes.dart';
+import 'core/theme/theme.dart';
 import 'features/games/data/data.dart';
 import 'features/games/presentation/presentation.dart';
 
@@ -28,6 +29,7 @@ class App extends StatelessWidget {
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: appRouter,
+          theme: appTheme,
         ),
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:pixelblitz_app/features/games/data/models/rawg_game_model.dart';
 
 class RawgGamesListResponse {
@@ -21,7 +20,6 @@ class RawgGamesListResponse {
         previous: json['previous'],
         results: List<RawgGameModel>.from(
           json['results'].map((rawgGame) {
-            debugPrint('results');
             return RawgGameModel.fromMap(rawgGame);
           }),
         ),
