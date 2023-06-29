@@ -1,19 +1,19 @@
 class Platform {
-  final int id;
-  final String name;
-  final String slug;
-  final int gamesCount;
-  final String? imageBackground;
-  final DateTime? releasedAt;
-
   Platform({
     required this.id,
     required this.name,
     required this.slug,
-    required this.gamesCount,
+    this.gamesCount,
     this.imageBackground,
     this.releasedAt,
   });
+  
+  final int id;
+  final String name;
+  final String slug;
+  final int? gamesCount;
+  final String? imageBackground;
+  final DateTime? releasedAt;
 
   Platform copyWith({
     int? id,

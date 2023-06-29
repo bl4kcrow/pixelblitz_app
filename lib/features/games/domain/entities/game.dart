@@ -21,7 +21,7 @@ class Game {
   final String dominantColor;
   final List<Platform> platforms;
   final List<Genre> genres;
-  final List<Store> stores;
+  final List<Store>? stores;
   final List<Tag> tags;
   final String? esrbRating;
   final List<String> shortScreenshots;

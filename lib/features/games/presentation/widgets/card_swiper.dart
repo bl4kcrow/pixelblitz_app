@@ -1,4 +1,4 @@
-import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
@@ -105,20 +105,11 @@ class CardSwiper extends StatelessWidget {
           SizedBox.expand(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 2.0),
-              child: Image.network(
-                currentGame.backgroundImage,
+              child: CachedNetworkImage(
+                imageUrl: currentGame.backgroundImage,
                 fit: BoxFit.cover,
-                loadingBuilder: (
-                  _,
-                  child,
-                  loadingProgress,
-                ) {
-                  if (loadingProgress != null) {
-                    return const SizedBox.shrink();
-                  } else {
-                    return FadeIn(child: child);
-                  }
-                },
+                memCacheHeight: 2160,
+                memCacheWidth: 3840,
               ),
             ),
           ),
@@ -133,7 +124,7 @@ class CardSwiper extends StatelessWidget {
                     AppColors.eerieBlack,
                   ],
                   stops: [
-                    0.5,
+                    0.7,
                     1.0,
                   ],
                 ),

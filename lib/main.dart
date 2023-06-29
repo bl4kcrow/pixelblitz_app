@@ -21,11 +21,27 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (context) => GamesRepositoryImpl(RawgGamesDatasource()),
-      child: BlocProvider(
-        create: (context) => GamesBloc(context.read<GamesRepositoryImpl>())
-          ..add(
-            GetNewAndTrending(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                NewAndTrendingBloc(context.read<GamesRepositoryImpl>())
+                  ..add(GetNewAndTrending()),
           ),
+          BlocProvider(
+            create: (context) =>
+                PopularBloc(context.read<GamesRepositoryImpl>())
+                  ..add(
+                    GetInitialPopular(
+                      from: DateTime.now().copyWith(
+                        month: 01,
+                        day: 01,
+                      ),
+                      to: DateTime.now(),
+                    ),
+                  ),
+          ),
+        ],
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: appRouter,

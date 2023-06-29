@@ -1,15 +1,7 @@
-part of 'games_bloc.dart';
+part of 'new_and_trending_bloc.dart';
 
-enum GamesRequestStatus {
-  initial,
-  success,
-  error,
-  loading,
-}
-
-@immutable
-class GamesState extends Equatable {
-  const GamesState({
+class NewAndTrendingState extends Equatable {
+  const NewAndTrendingState({
     this.games = const [],
     this.requestStatus = GamesRequestStatus.initial,
   });
@@ -17,11 +9,11 @@ class GamesState extends Equatable {
   final List<Game> games;
   final GamesRequestStatus requestStatus;
 
-  GamesState copyWith({
+  NewAndTrendingState copyWith({
     List<Game>? games,
     GamesRequestStatus? requestStatus,
   }) =>
-      GamesState(
+      NewAndTrendingState(
         games: games ?? this.games,
         requestStatus: requestStatus ?? this.requestStatus,
       );

@@ -41,7 +41,7 @@ class GameMapper {
             )
             .toList(),
         stores: rawgGame.stores
-            .map(
+            ?.map(
               (rawgStore) => Store(
                 id: rawgStore.id,
                 name: rawgStore.name,

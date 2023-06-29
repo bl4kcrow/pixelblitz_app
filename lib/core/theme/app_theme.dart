@@ -21,6 +21,8 @@ final appTheme = ThemeData(
     surfaceTint: AppColors.eerieBlack,
   ),
   fontFamily: 'Satoshi',
+  splashColor: Colors.transparent,
+  highlightColor: Colors.transparent,
   textTheme: Typography().white.copyWith(
         displayLarge: AppTextStyle.displayLarge,
         displayMedium: AppTextStyle.displayMedium,

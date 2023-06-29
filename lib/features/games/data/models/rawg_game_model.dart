@@ -23,7 +23,7 @@ class RawgGameModel {
   final String dominantColor;
   final List<RawgPlatformModel> platforms;
   final List<RawgGenreModel> genres;
-  final List<RawgStoreModel> stores;
+  final List<RawgStoreModel>? stores;
   final List<RawgTagModel> tags;
   final String? esrbRating;
   final List<String> shortScreenshots;
@@ -137,9 +137,11 @@ class RawgGameModel {
         genres: List<RawgGenreModel>.from(
           json['genres'].map((genre) => RawgGenreModel.fromMap(genre)),
         ),
-        stores: List<RawgStoreModel>.from(
-          json['stores'].map((store) => RawgStoreModel.fromMap(store)),
-        ),
+        stores: json['stores'] != null
+            ? List<RawgStoreModel>.from(
+                json['stores'].map((store) => RawgStoreModel.fromMap(store)),
+              )
+            : null,
         tags: List<RawgTagModel>.from(
           json['tags'].map((tag) => RawgTagModel.fromMap(tag)),
         ),

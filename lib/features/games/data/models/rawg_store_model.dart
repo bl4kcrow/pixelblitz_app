@@ -30,9 +30,9 @@ class RawgStoreModel {
       RawgStoreModel.fromMap(json.decode(str));
 
   factory RawgStoreModel.fromMap(Map<String, dynamic> json) => RawgStoreModel(
-        id: json['store']["id"],
-        name: json['store']["name"],
-        slug: json['store']["slug"],
-        domain: json['store']["domain"],
+        id: json['store']['id'],
+        name: json['store']['name'],
+        slug: json['store']['slug'],
+        domain: json['store']['domain'],
       );
 }
