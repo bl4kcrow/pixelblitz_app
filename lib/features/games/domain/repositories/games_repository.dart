@@ -10,4 +10,10 @@ abstract class GamesRepository {
     required DateTime to,
     int page = 1,
   });
+
+  Future<List<Game>> getTop({
+    required DateTime from,
+    required DateTime to,
+    int page = 1,
+  });
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/theme/theme.dart';
-
-enum TrendingGames { recommended, popular, news }
+import '../../../../core/utils/utils.dart';
+import '../presentation.dart';
 
 class SegmentedListsButton extends StatefulWidget {
   const SegmentedListsButton({super.key});
@@ -13,7 +14,7 @@ class SegmentedListsButton extends StatefulWidget {
 }
 
 class _SegmentedListsButtonState extends State<SegmentedListsButton> {
-  late Set<TrendingGames> selectedTrendingGames;
+  late Set<GameTopLists> selectedTopList;
 
   final String previousYear = (DateTime.now().year - 1).toString();
 
@@ -23,7 +24,7 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
   @override
   void initState() {
     super.initState();
-    selectedTrendingGames = <TrendingGames>{TrendingGames.popular};
+    selectedTopList = <GameTopLists>{GameTopLists.popular};
     WidgetsBinding.instance.addPostFrameCallback((_) => _recordSize());
   }
 
@@ -34,7 +35,7 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
     });
   }
 
-  Shader? getTextGradient(RenderBox? renderBox) {
+  Shader? _getTextGradient(RenderBox? renderBox) {
     Shader? linearShader;
 
     if (renderBox != null) {
@@ -64,9 +65,40 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
       padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
       child: SegmentedButton(
         onSelectionChanged: (newSelectection) {
+          late final DateTime fromDate;
+          late final DateTime toDate;
+
           setState(() {
-            selectedTrendingGames = newSelectection;
+            selectedTopList = newSelectection;
           });
+
+          if (selectedTopList.first == GameTopLists.best) {
+            fromDate = DateTime.now().copyWith(
+              month: 01,
+              day: 01,
+              year: int.parse(previousYear),
+            );
+
+            toDate = DateTime.now().copyWith(
+              month: 12,
+              day: 31,
+              year: int.parse(previousYear),
+            );
+          } else {
+            fromDate = DateTime.now().copyWith(
+              month: 01,
+              day: 01,
+            );
+            toDate = DateTime.now();
+          }
+
+          context.read<TopListsBloc>().add(
+                GetInitial(
+                  from: fromDate,
+                  to: toDate,
+                  listType: selectedTopList.first,
+                ),
+              );
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith(
@@ -84,33 +116,33 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
                 ? textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                     foreground: Paint()
-                      ..shader = getTextGradient(myTextRenderBox),
+                      ..shader = _getTextGradient(myTextRenderBox),
                   )
                 : textTheme.bodySmall!,
           ),
         ),
-        segments: <ButtonSegment<TrendingGames>>[
-          const ButtonSegment<TrendingGames>(
-            value: TrendingGames.recommended,
+        segments: <ButtonSegment<GameTopLists>>[
+          const ButtonSegment<GameTopLists>(
+            value: GameTopLists.top,
             label: Text(
               Labels.top,
             ),
           ),
-          ButtonSegment<TrendingGames>(
-            value: TrendingGames.popular,
+          ButtonSegment<GameTopLists>(
+            value: GameTopLists.popular,
             label: Text(
               Labels.popular,
               key: myTextKey,
             ),
           ),
-          ButtonSegment<TrendingGames>(
-            value: TrendingGames.news,
+          ButtonSegment<GameTopLists>(
+            value: GameTopLists.best,
             label: Text(
               '${Labels.best} $previousYear',
             ),
           ),
         ],
-        selected: selectedTrendingGames,
+        selected: selectedTopList,
         showSelectedIcon: false,
       ),
     );

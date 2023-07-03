@@ -74,4 +74,36 @@ class RawgGamesDatasource implements GamesDatasource {
 
     return games;
   }
+
+  @override
+  Future<List<Game>> getTop({
+    required DateTime from,
+    required DateTime to,
+    int page = 1,
+  }) async {
+    final List<Game> games = [];
+
+    final String dates =
+        '${DateFormat('yyyy-MM-dd').format(from)},${DateFormat('yyyy-MM-dd').format(to)}';
+
+    final response = await _dio.get(
+      '/games',
+      queryParameters: {
+        'dates': dates,
+        'ordering': '-rating',
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+
+    final rawgGamesList = RawgGamesListResponse.fromJson(response.data).results;
+
+    games.addAll(
+      rawgGamesList.map(
+        (rawgGame) => GameMapper.rawgGameToEntity(rawgGame),
+      ),
+    );
+
+    return games;
+  }
 }

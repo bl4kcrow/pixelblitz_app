@@ -48,23 +48,38 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
   void _scrollListener() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange) {
-      debugPrint('NEXTLOAD');
       currentPage++;
-      context.read<PopularBloc>().add(
-            GetNextPopular(
-              from: fromDate,
-              to: DateTime.now(),
-              page: currentPage,
-            ),
-          );
+      context.read<TopListsBloc>().add(GetNext(page: currentPage));
     }
+  }
+
+  Widget _shimmerBody() {
+    return GridView(
+      padding: const EdgeInsets.all(Insets.xsmall),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 16 / 9,
+        crossAxisCount: 2,
+        mainAxisSpacing: Insets.medium,
+        crossAxisSpacing: Insets.small,
+      ),
+      children: [
+        for (int x = 1; x <= 8; x++) ...[
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: AppColors.eerieBlack,
+            ),
+          ),
+        ],
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: Insets.medium),
-      child: BlocBuilder<PopularBloc, PopularState>(
+      child: BlocBuilder<TopListsBloc, TopListsState>(
         builder: (context, state) {
           if (state.requestStatus == GamesRequestStatus.success) {
             return GridCards(
@@ -72,8 +87,8 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
               scrollController: scrollController,
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
+            return AppShimmer(
+              child: _shimmerBody(),
             );
           }
         },
@@ -83,6 +98,42 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
 }
 
 class _TopSwiper extends StatelessWidget {
+  Widget _shimmerBody(Size screenSize) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Insets.medium,
+        vertical: Insets.large,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Insets.medium,
+            ),
+            height: 30.0,
+            width: screenSize.width * 0.8,
+            decoration: const BoxDecoration(color: AppColors.eerieBlack),
+          ),
+          const SizedBox(height: Insets.small),
+          Container(
+            height: 10.0,
+            width: screenSize.width * 0.3,
+            decoration: const BoxDecoration(color: AppColors.eerieBlack),
+          ),
+          const SizedBox(height: Insets.small),
+          Container(
+            height: 10.0,
+            width: screenSize.width * 0.5,
+            decoration: const BoxDecoration(color: AppColors.eerieBlack),
+          ),
+          const SizedBox(height: Insets.small),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
@@ -96,11 +147,12 @@ class _TopSwiper extends StatelessWidget {
               ? CardSwiper(
                   games: state.games,
                 )
-              : const Center(
-                  child: CircularProgressIndicator.adaptive(),
+              : AppShimmer(
+                  child: _shimmerBody(screenSize),
                 ),
         );
       },
     );
   }
 }
+  

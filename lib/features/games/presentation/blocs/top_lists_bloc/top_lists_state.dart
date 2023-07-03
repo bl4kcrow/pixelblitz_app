@@ -1,7 +1,7 @@
-part of 'popular_bloc.dart';
+part of 'top_lists_bloc.dart';
 
-class PopularState extends Equatable {
-  const PopularState({
+class TopListsState extends Equatable {
+  const TopListsState({
     this.games = const [],
     this.requestStatus = GamesRequestStatus.initial,
   });
@@ -9,11 +9,11 @@ class PopularState extends Equatable {
   final List<Game> games;
   final GamesRequestStatus requestStatus;
 
-  PopularState copyWith({
+  TopListsState copyWith({
     List<Game>? games,
     GamesRequestStatus? requestStatus,
   }) =>
-      PopularState(
+      TopListsState(
         games: games ?? this.games,
         requestStatus: requestStatus ?? this.requestStatus,
       );

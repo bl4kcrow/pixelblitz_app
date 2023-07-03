@@ -30,9 +30,9 @@ class App extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) =>
-                PopularBloc(context.read<GamesRepositoryImpl>())
+                TopListsBloc(context.read<GamesRepositoryImpl>())
                   ..add(
-                    GetInitialPopular(
+                    GetInitial(
                       from: DateTime.now().copyWith(
                         month: 01,
                         day: 01,

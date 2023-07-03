@@ -49,7 +49,7 @@ class RawgGameModel {
     required this.dominantColor,
     required this.platforms,
     required this.genres,
-    required this.stores,
+    this.stores,
     required this.tags,
     this.esrbRating,
     required this.shortScreenshots,
