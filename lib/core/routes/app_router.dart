@@ -28,6 +28,13 @@ final appRouter = GoRouter(
             GoRoute(
               path: RoutesName.homeScreen,
               builder: (context, state) => const HomeScreen(),
+                routes: [
+                  GoRoute(
+                    name: RoutesName.gameDetailsScreen,
+                    path: RoutesName.gameDetailsScreen,
+                    builder: (context, state) => const GameDetailsScreen(),
+                  )
+                ]
             ),
           ],
         ),

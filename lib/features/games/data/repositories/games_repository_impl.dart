@@ -8,6 +8,15 @@ class GamesRepositoryImpl implements GamesRepository {
   final GamesDatasource gamesDatasource;
 
   @override
+  Future<GameDetails> getGameDetails({
+    required int id,
+  }) async {
+    return gamesDatasource.getGameDetails(
+      id: id,
+    );
+  }
+
+  @override
   Future<List<Game>> getNewAndTrending({
     int page = 1,
   }) async {

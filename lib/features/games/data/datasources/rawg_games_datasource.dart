@@ -17,6 +17,19 @@ class RawgGamesDatasource implements GamesDatasource {
   );
 
   @override
+  Future<GameDetails> getGameDetails({
+    required int id,
+  }) async {
+    final response = await _dio.get(
+      '/games/$id',
+    );
+
+    final rawgGameDetails = RawgGameDetailsModel.fromMap(response.data);
+
+    return GameDetailsMapper.rawgGameToEntity(rawgGameDetails);
+  }
+
+  @override
   Future<List<Game>> getNewAndTrending({
     int page = 1,
   }) async {

@@ -63,7 +63,7 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
         crossAxisSpacing: Insets.small,
       ),
       children: [
-        for (int x = 1; x <= 8; x++) ...[
+        for (int item = 1; item <= 8; item++) ...[
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),

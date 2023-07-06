@@ -6,7 +6,6 @@ class RawgPlatformModel {
     required this.name,
     required this.slug,
     this.gamesCount,
-    this.imageBackground,
     this.releasedAt,
   });
   
@@ -14,7 +13,6 @@ class RawgPlatformModel {
   final String name;
   final String slug;
   final int? gamesCount;
-  final String? imageBackground;
   final DateTime? releasedAt;
 
   RawgPlatformModel copyWith({
@@ -30,7 +28,6 @@ class RawgPlatformModel {
         name: name ?? this.name,
         slug: slug ?? this.slug,
         gamesCount: gamesCount ?? this.gamesCount,
-        imageBackground: imageBackground ?? this.imageBackground,
         releasedAt: releasedAt ?? this.releasedAt,
       );
 
@@ -43,7 +40,6 @@ class RawgPlatformModel {
         name: json['platform']['name'],
         slug: json['platform']['slug'],
         gamesCount: json['platform']['games_count'],
-        imageBackground: json['platform']['image_background'],
         releasedAt: json["released_at"] != null
             ? DateTime.tryParse(json['released_at'])
             : null,

@@ -1,6 +1,10 @@
 import '../domain.dart';
 
 abstract class GamesRepository {
+  Future<GameDetails> getGameDetails({
+    required int id,
+  });
+
   Future<List<Game>> getNewAndTrending({
     int page = 1,
   });

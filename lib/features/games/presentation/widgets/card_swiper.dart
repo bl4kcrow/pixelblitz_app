@@ -1,7 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+
+import '../../../../core/routes/routes.dart';
 import '../../../../core/theme/theme.dart';
 import '../../domain/domain.dart';
 import '../presentation.dart';
@@ -98,76 +102,82 @@ class CardSwiper extends StatelessWidget {
     final currentGame = games[index];
     final String genres = currentGame.genres.join(', ');
 
-    return AspectRatio(
-      aspectRatio: 16 / 9,
-      child: Stack(
-        children: [
-          SizedBox.expand(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 2.0),
-              child: CachedNetworkImage(
-                imageUrl: currentGame.backgroundImage,
-                fit: BoxFit.cover,
-                memCacheHeight: 2160,
-                memCacheWidth: 3840,
-              ),
-            ),
-          ),
-          const SizedBox.expand(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    AppColors.eerieBlack,
-                  ],
-                  stops: [
-                    0.7,
-                    1.0,
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Positioned.fill(
-            child: SizedBox(
-              width: screenSize.width,
+    return GestureDetector(
+      onTap: () {
+        context.read<GameDetailsBloc>().add(GetDetails(id: currentGame.id));
+        context.goNamed(RoutesName.gameDetailsScreen);
+      },
+      child: AspectRatio(
+        aspectRatio: 16 / 9,
+        child: Stack(
+          children: [
+            SizedBox.expand(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.medium,
-                  vertical: Insets.large,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      currentGame.name,
-                      style: textTheme.headlineLarge,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
-                    const SizedBox(height: Insets.medium),
-                    PlatformsIconRow(
-                      platforms: currentGame.platforms,
-                    ),
-                    const SizedBox(height: Insets.medium),
-                    Text(
-                      genres,
-                      style: textTheme.bodyMedium?.copyWith(
-                        color: AppColors.white.withOpacity(0.4),
-                      ),
-                      maxLines: 2,
-                    ),
-                  ],
+                padding: const EdgeInsets.only(bottom: 2.0),
+                child: CachedNetworkImage(
+                  imageUrl: currentGame.backgroundImage,
+                  fit: BoxFit.cover,
+                  memCacheHeight: 2160,
+                  memCacheWidth: 3840,
                 ),
               ),
             ),
-          ),
-        ],
+            const SizedBox.expand(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      AppColors.eerieBlack,
+                    ],
+                    stops: [
+                      0.7,
+                      1.0,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Positioned.fill(
+              child: SizedBox(
+                width: screenSize.width,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Insets.medium,
+                    vertical: Insets.large,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        currentGame.name,
+                        style: textTheme.headlineLarge,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                      const SizedBox(height: Insets.medium),
+                      PlatformsIconRow(
+                        platforms: currentGame.platforms,
+                      ),
+                      const SizedBox(height: Insets.medium),
+                      Text(
+                        genres,
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: AppColors.white.withOpacity(0.4),
+                        ),
+                        maxLines: 2,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
