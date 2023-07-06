@@ -36,7 +36,6 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
     day: 01,
   );
 
-  int currentPage = 1;
   ScrollController scrollController = ScrollController();
 
   @override
@@ -48,8 +47,7 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
   void _scrollListener() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange) {
-      currentPage++;
-      context.read<TopListsBloc>().add(GetNext(page: currentPage));
+      context.read<TopListsBloc>().add(GetNext());
     }
   }
 

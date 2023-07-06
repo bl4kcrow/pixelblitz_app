@@ -15,10 +15,4 @@ class GetInitial extends TopListsEvent {
   final GameTopLists listType;
 }
 
-class GetNext extends TopListsEvent {
-  GetNext({
-    required this.page,
-  });
-
-  final int page;
-}
+class GetNext extends TopListsEvent {}

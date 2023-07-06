@@ -14,10 +14,13 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
     on<GetNext>(_onGetNext);
   }
 
-  final GamesRepository gamesRepository;
   late GameTopLists selectedList;
   late DateTime selectedFromDate;
   late DateTime selectedToDate;
+
+  final GamesRepository gamesRepository;
+
+  int currentPage = 0;
 
   void _onGetInitial(
     GetInitial event,
@@ -35,13 +38,14 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
       selectedList = event.listType;
       selectedFromDate = event.from;
       selectedToDate = event.to;
+      currentPage = 1;
 
       switch (event.listType) {
         case GameTopLists.top:
           games = await gamesRepository.getTop(
             from: event.from,
             to: event.to,
-            page: 1,
+            page: currentPage,
           );
           break;
         case GameTopLists.popular:
@@ -49,14 +53,14 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
           games = await gamesRepository.getPopular(
             from: event.from,
             to: event.to,
-            page: 1,
+            page: currentPage,
           );
           break;
         default:
           games = await gamesRepository.getPopular(
             from: event.from,
             to: event.to,
-            page: 1,
+            page: currentPage,
           );
       }
 
@@ -69,6 +73,7 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
         );
       }
     } catch (error) {
+      currentPage--;
       debugPrint(error.toString());
       emit(
         state.copyWith(requestStatus: GamesRequestStatus.error),
@@ -83,12 +88,13 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
     try {
       List<Game> games = [];
 
+      currentPage++;
       switch (selectedList) {
         case GameTopLists.top:
           games = await gamesRepository.getTop(
             from: selectedFromDate,
             to: selectedToDate,
-            page: event.page,
+            page: currentPage,
           );
           break;
         case GameTopLists.popular:
@@ -96,14 +102,14 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
           games = await gamesRepository.getPopular(
             from: selectedFromDate,
             to: selectedToDate,
-            page: event.page,
+            page: currentPage,
           );
           break;
         default:
           games = await gamesRepository.getPopular(
             from: selectedFromDate,
             to: selectedToDate,
-            page: event.page,
+            page: currentPage,
           );
       }
 
@@ -116,6 +122,7 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
         );
       }
     } catch (error) {
+      currentPage--;
       debugPrint(error.toString());
       emit(
         state.copyWith(requestStatus: GamesRequestStatus.error),
