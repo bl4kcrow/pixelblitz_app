@@ -1,4 +1,5 @@
 export 'blocs/game_details_bloc/game_details_bloc.dart';
+export 'blocs/game_screenshots_bloc/game_screenshots_bloc.dart';
 export 'blocs/new_and_trending_bloc/new_and_trending_bloc.dart';
 export 'blocs/top_lists_bloc/top_lists_bloc.dart';
 
@@ -10,5 +11,6 @@ export 'screens/platforms_screen.dart';
 
 export 'widgets/card_swiper.dart';
 export 'widgets/grid_cards.dart';
+export 'widgets/horizontal_game_screenshots_view.dart';
 export 'widgets/platforms_icon_row.dart';
 export 'widgets/segmented_lists_button.dart';

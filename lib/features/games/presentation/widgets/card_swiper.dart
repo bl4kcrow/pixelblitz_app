@@ -106,6 +106,9 @@ class CardSwiper extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.read<GameDetailsBloc>().add(GetDetails(id: currentGame.id));
+        context
+            .read<GameScreenshotsBloc>()
+            .add(GetInitialScreenshots(id: currentGame.id));
         context.goNamed(
           RoutesName.gameDetailsScreen,
           extra: heroId,

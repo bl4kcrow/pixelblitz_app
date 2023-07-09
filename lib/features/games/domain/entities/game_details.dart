@@ -14,7 +14,7 @@ class GameDetails {
   final DateTime? released;
   final bool tba;
   final String backgroundImage;
-  final String backgroundImageAdditional;
+  final String? backgroundImageAdditional;
   final String website;
   final double rating;
   final String saturatedColor;
@@ -38,7 +38,7 @@ class GameDetails {
     this.released,
     required this.tba,
     required this.backgroundImage,
-    required this.backgroundImageAdditional,
+    this.backgroundImageAdditional,
     required this.website,
     required this.rating,
     required this.saturatedColor,
@@ -110,7 +110,6 @@ class GameDetails {
         descriptionRaw: Labels.notApplicable,
         tba: false,
         backgroundImage: Labels.notApplicable,
-        backgroundImageAdditional: Labels.notApplicable,
         website: Labels.notApplicable,
         rating: 0.0,
         saturatedColor: AppColors.maroon.value.toString(),

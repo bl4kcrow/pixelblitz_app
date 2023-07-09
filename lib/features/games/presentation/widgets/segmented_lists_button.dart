@@ -68,28 +68,36 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
           late final DateTime fromDate;
           late final DateTime toDate;
 
+          final dateTimeNow = DateTime.now();
+
           setState(() {
             selectedTopList = newSelectection;
           });
 
           if (selectedTopList.first == GameTopLists.best) {
-            fromDate = DateTime.now().copyWith(
+            fromDate = dateTimeNow.copyWith(
               month: 01,
               day: 01,
               year: int.parse(previousYear),
             );
 
-            toDate = DateTime.now().copyWith(
+            toDate = dateTimeNow.copyWith(
               month: 12,
               day: 31,
               year: int.parse(previousYear),
             );
+          } else if (selectedTopList.first == GameTopLists.recentReleases) {
+            fromDate = DateTime(
+              dateTimeNow.year,
+              dateTimeNow.month - 1,
+            );
+            toDate = dateTimeNow;
           } else {
-            fromDate = DateTime.now().copyWith(
+            fromDate = dateTimeNow.copyWith(
               month: 01,
               day: 01,
             );
-            toDate = DateTime.now();
+            toDate = dateTimeNow;
           }
 
           context.read<TopListsBloc>().add(
@@ -105,6 +113,9 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
             (states) => states.contains(MaterialState.selected)
                 ? AppColors.black
                 : AppColors.eerieBlack,
+          ),
+          side: const MaterialStatePropertyAll(
+            BorderSide(color: AppColors.charlestonGrey),
           ),
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(
@@ -123,9 +134,9 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
         ),
         segments: <ButtonSegment<GameTopLists>>[
           const ButtonSegment<GameTopLists>(
-            value: GameTopLists.top,
+            value: GameTopLists.recentReleases,
             label: Text(
-              Labels.top,
+              Labels.recent,
             ),
           ),
           ButtonSegment<GameTopLists>(

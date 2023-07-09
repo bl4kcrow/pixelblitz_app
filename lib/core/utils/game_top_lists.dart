@@ -1,5 +1,6 @@
 enum GameTopLists {
-  top,
-  popular,
   best,
+  popular,
+  recentReleases,
+  top,
 }

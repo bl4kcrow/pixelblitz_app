@@ -45,6 +45,10 @@ class App extends StatelessWidget {
             create: (context) =>
                 GameDetailsBloc(context.read<GamesRepositoryImpl>()),
           ),
+          BlocProvider(
+            create: (context) =>
+                GameScreenshotsBloc(context.read<GamesRepositoryImpl>()),
+          ),
         ],
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,

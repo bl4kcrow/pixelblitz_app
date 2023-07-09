@@ -1,6 +1,7 @@
 class Labels {
   const Labels._();
 
+  static const about = 'About';
   static const android = 'android';
   static const apple = 'apple';
   static const atari = 'atari';
@@ -10,6 +11,7 @@ class Labels {
   static const gameBoy = 'game-boy';
   static const gamecube = 'gamecube';
   static const home = 'Home';
+  static const info = 'Info';
   static const iOS = 'ios';
   static const linux = 'linux';
   static const macintosh = 'macintosh';
@@ -26,7 +28,9 @@ class Labels {
   static const playstation = 'playstation';
   static const popular = 'POPULAR';
   static const psVita = 'ps-vita';
+  static const recent = 'RECENT';
   static const sega = 'sega';
+  static const snapshots = 'SNAPSHOTS';
   static const snes = 'snes';
   static const top = 'TOP';
   static const wiiU = 'wii-u';

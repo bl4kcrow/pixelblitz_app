@@ -51,7 +51,8 @@ class RawgGameModel {
         id: json['id'],
         name: json['name'],
         released: DateTime.parse(json['released']),
-        backgroundImage: json['background_image'],
+        backgroundImage: json['background_image'] ??
+            'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg',
         rating: json['rating']?.toDouble(),
         metacritic: json['metacritic'],
         platforms: List<RawgPlatformModel>.from(

@@ -74,6 +74,12 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
   }
 
   @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: Insets.medium),

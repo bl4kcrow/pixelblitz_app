@@ -1,12 +1,13 @@
-export '../domain/entities/developer.dart';
-export '../domain/entities/game_details.dart';
-export '../domain/entities/game.dart';
-export '../domain/entities/genre.dart';
-export '../domain/entities/store.dart';
-export '../domain/entities/platform.dart';
-export '../domain/entities/publisher.dart';
-export '../domain/entities/tag.dart';
+export 'entities/developer.dart';
+export 'entities/game_details.dart';
+export 'entities/game.dart';
+export 'entities/genre.dart';
+export 'entities/platform.dart';
+export 'entities/publisher.dart';
+export 'entities/game_screenshot.dart';
+export 'entities/store.dart';
+export 'entities/tag.dart';
 
-export '../domain/datasources/games_datasource.dart';
+export 'datasources/games_datasource.dart';
 
-export '../domain/repositories/games_repository.dart';
+export 'repositories/games_repository.dart';

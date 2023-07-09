@@ -23,4 +23,9 @@ class Publisher {
         slug: slug ?? this.slug,
         gamesCount: gamesCount ?? this.gamesCount,
       );
+  
+  @override
+  String toString() {
+    return name;
+  }
 }

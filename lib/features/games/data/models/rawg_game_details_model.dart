@@ -13,7 +13,7 @@ class RawgGameDetailsModel {
   final DateTime? released;
   final bool tba;
   final String backgroundImage;
-  final String backgroundImageAdditional;
+  final String? backgroundImageAdditional;
   final String website;
   final double rating;
   final String saturatedColor;
@@ -37,7 +37,7 @@ class RawgGameDetailsModel {
     this.released,
     required this.tba,
     required this.backgroundImage,
-    required this.backgroundImageAdditional,
+    this.backgroundImageAdditional,
     required this.website,
     required this.rating,
     required this.saturatedColor,

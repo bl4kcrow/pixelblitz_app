@@ -48,6 +48,13 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
             page: currentPage,
           );
           break;
+        case GameTopLists.recentReleases:
+          games = await gamesRepository.getRecentReleases(
+            from: event.from,
+            to: event.to,
+            page: currentPage,
+          );
+          break;
         case GameTopLists.popular:
         case GameTopLists.best:
           games = await gamesRepository.getPopular(

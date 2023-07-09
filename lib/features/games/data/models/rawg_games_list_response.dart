@@ -1,15 +1,15 @@
-import 'package:pixelblitz_app/features/games/data/models/rawg_game_model.dart';
+import '../data.dart';
 
 class RawgGamesListResponse {
   RawgGamesListResponse({
     required this.count,
-    required this.next,
-    required this.previous,
+    this.next,
+    this.previous,
     required this.results,
   });
 
   final int count;
-  final String next;
+  final String? next;
   final String? previous;
   final List<RawgGameModel> results;
 
