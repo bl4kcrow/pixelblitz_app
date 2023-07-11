@@ -193,6 +193,7 @@ class _GameCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final String developers = gameDetails.developers.join(', ');
     final String genres = gameDetails.genres.join(', ');
+    final screenSize = MediaQuery.sizeOf(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Hero(
@@ -274,6 +275,41 @@ class _GameCard extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+            Positioned(
+              right: Insets.small,
+              top: screenSize.height * 0.07,
+              child: gameDetails.metacritic != null
+                  ? CircleAvatar(
+                      backgroundColor: MetacriticScore.getFromValue(
+                        gameDetails.metacritic!,
+                      ).color,
+                      radius: 22,
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.eerieBlack,
+                        radius: 20,
+                        child: Text(
+                          gameDetails.metacritic.toString(),
+                          style: textTheme.titleLarge?.copyWith(
+                            color: MetacriticScore.getFromValue(
+                              gameDetails.metacritic!,
+                            ).color,
+                          ),
+                        ),
+                      ),
+                    )
+                  : CircleAvatar(
+                      backgroundColor: AppColors.eerieBlack,
+                      radius: 22,
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.maroon,
+                        radius: 20,
+                        child: Text(
+                          Labels.questionMark,
+                          style: textTheme.titleLarge,
+                        ),
+                      ),
+                    ),
             ),
           ],
         ),

@@ -30,6 +30,7 @@ class Labels {
   static const playstation = 'playstation';
   static const popular = 'POPULAR';
   static const psVita = 'ps-vita';
+  static const questionMark = '?';
   static const recent = 'RECENT';
   static const sega = 'sega';
   static const snapshots = 'SNAPSHOTS';
