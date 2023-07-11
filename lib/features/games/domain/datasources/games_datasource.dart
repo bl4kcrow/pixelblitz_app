@@ -9,24 +9,29 @@ abstract class GamesDatasource {
     required int id,
     int page = 1,
   });
+
+  Future<ApiResponse> getGameSeries({
+    required int id,
+    int page = 1,
+  });
   
-  Future<List<Game>> getNewAndTrending({
+  Future<ApiResponse> getNewAndTrending({
     int page = 1,
   });
 
-  Future<List<Game>> getPopular({
+  Future<ApiResponse> getPopular({
     required DateTime from,
     required DateTime to,
     int page = 1,
   });
 
-  Future<List<Game>> getRecentReleases({
+  Future<ApiResponse> getRecentReleases({
     required DateTime from,
     required DateTime to,
     int page = 1,
   });
 
-  Future<List<Game>> getTop({
+  Future<ApiResponse> getTop({
     required DateTime from,
     required DateTime to,
     int page = 1,

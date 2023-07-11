@@ -58,11 +58,25 @@ class RawgGamesDatasource implements GamesDatasource {
   }
 
   @override
-  Future<List<Game>> getNewAndTrending({
+  Future<ApiResponse> getGameSeries({
+    required int id,
     int page = 1,
   }) async {
-    final List<Game> games = [];
 
+    final response = await _dio.get(
+      '/games/$id/game-series',
+      queryParameters: {
+        'page': page,
+      },
+    );
+
+    return RawgGamesListResponse.fromJson(response.data);
+  }
+
+  @override
+  Future<ApiResponse> getNewAndTrending({
+    int page = 1,
+  }) async {
     final response = await _dio.get(
       '/games/lists/main',
       queryParameters: {
@@ -73,24 +87,15 @@ class RawgGamesDatasource implements GamesDatasource {
       },
     );
 
-    final rawgGamesList = RawgGamesListResponse.fromJson(response.data).results;
-
-    games.addAll(
-      rawgGamesList.map(
-        (rawgGame) => GameMapper.rawgGameToEntity(rawgGame),
-      ),
-    );
-
-    return games;
+    return RawgGamesListResponse.fromJson(response.data);
   }
 
   @override
-  Future<List<Game>> getPopular({
+  Future<ApiResponse> getPopular({
     int page = 1,
     required DateTime from,
     required DateTime to,
   }) async {
-    final List<Game> games = [];
 
     final String dates =
         '${DateFormat('yyyy-MM-dd').format(from)},${DateFormat('yyyy-MM-dd').format(to)}';
@@ -105,24 +110,15 @@ class RawgGamesDatasource implements GamesDatasource {
       },
     );
 
-    final rawgGamesList = RawgGamesListResponse.fromJson(response.data).results;
-
-    games.addAll(
-      rawgGamesList.map(
-        (rawgGame) => GameMapper.rawgGameToEntity(rawgGame),
-      ),
-    );
-
-    return games;
+    return RawgGamesListResponse.fromJson(response.data);
   }
 
   @override
-  Future<List<Game>> getRecentReleases({
+  Future<ApiResponse> getRecentReleases({
     required DateTime from,
     required DateTime to,
     int page = 1,
   }) async {
-    final List<Game> games = [];
 
     final String dates =
         '${DateFormat('yyyy-MM-dd').format(from)},${DateFormat('yyyy-MM-dd').format(to)}';
@@ -137,24 +133,15 @@ class RawgGamesDatasource implements GamesDatasource {
       },
     );
 
-    final rawgGamesList = RawgGamesListResponse.fromJson(response.data).results;
-
-    games.addAll(
-      rawgGamesList.map(
-        (rawgGame) => GameMapper.rawgGameToEntity(rawgGame),
-      ),
-    );
-
-    return games;
+    return RawgGamesListResponse.fromJson(response.data);
   }
 
   @override
-  Future<List<Game>> getTop({
+  Future<ApiResponse> getTop({
     required DateTime from,
     required DateTime to,
     int page = 1,
   }) async {
-    final List<Game> games = [];
 
     final String dates =
         '${DateFormat('yyyy-MM-dd').format(from)},${DateFormat('yyyy-MM-dd').format(to)}';
@@ -169,14 +156,6 @@ class RawgGamesDatasource implements GamesDatasource {
       },
     );
 
-    final rawgGamesList = RawgGamesListResponse.fromJson(response.data).results;
-
-    games.addAll(
-      rawgGamesList.map(
-        (rawgGame) => GameMapper.rawgGameToEntity(rawgGame),
-      ),
-    );
-
-    return games;
+    return RawgGamesListResponse.fromJson(response.data);
   }
 }

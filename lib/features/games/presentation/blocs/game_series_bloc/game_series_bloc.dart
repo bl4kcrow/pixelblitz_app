@@ -5,28 +5,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../domain/domain.dart';
 
-part 'game_screenshots_event.dart';
-part 'game_screenshots_state.dart';
+part 'game_series_event.dart';
+part 'game_series_state.dart';
 
-class GameScreenshotsBloc
-    extends Bloc<GameScreenshotsEvent, GameScreenshotsState> {
-  GameScreenshotsBloc(this.gamesRepository)
-      : super(const GameScreenshotsState()) {
-    on<GetInitialScreenshots>(_onGetInitialScreenshots);
-    on<GetNextScreenshots>(_onGetNextScreenshots);
+class GameSeriesBloc extends Bloc<GameSeriesEvent, GameSeriesState> {
+  GameSeriesBloc(this.gamesRepository) : super(const GameSeriesState()) {
+    on<GetInitialGameSeries>(_onGetInitialGameSeries);
+    on<GetNextGameSeries>(_onGetNextGameSeries);
   }
 
   final GamesRepository gamesRepository;
 
   int currentPage = 0;
   int gameId = 0;
+  bool haveNext = false;
 
-  void _onGetInitialScreenshots(
-    GetInitialScreenshots event,
-    Emitter<GameScreenshotsState> emit,
+  void _onGetInitialGameSeries(
+    GetInitialGameSeries event,
+    Emitter<GameSeriesState> emit,
   ) async {
     try {
-      List<GameScreenshot> screenshots = [];
+      List<Game> games = [];
 
       emit(
         state.copyWith(
@@ -37,18 +36,20 @@ class GameScreenshotsBloc
       currentPage = 1;
       gameId = event.id;
 
-      screenshots = await gamesRepository.getGameScreenshots(
+      final ApiResponse response = await gamesRepository.getGameSeries(
         id: event.id,
         page: currentPage,
       );
 
+      games = response.results as List<Game>;
+      haveNext = response.next != null;
+
       emit(
         state.copyWith(
-          gameScreenshots: screenshots,
+          games: games,
           requestStatus: GamesRequestStatus.success,
         ),
       );
-      
     } catch (error) {
       currentPage--;
       debugPrint(error.toString());
@@ -58,30 +59,27 @@ class GameScreenshotsBloc
     }
   }
 
-  void _onGetNextScreenshots(
-    GetNextScreenshots event,
-    Emitter<GameScreenshotsState> emit,
+  void _onGetNextGameSeries(
+    GetNextGameSeries event,
+    Emitter<GameSeriesState> emit,
   ) async {
     try {
-      List<GameScreenshot> screenshots = [];
-
-      emit(
-        state.copyWith(
-          requestStatus: GamesRequestStatus.loading,
-        ),
-      );
+      List<Game> games = [];
 
       currentPage++;
 
-      screenshots = await gamesRepository.getGameScreenshots(
+      final ApiResponse response = await gamesRepository.getGameSeries(
         id: gameId,
         page: currentPage,
       );
 
-      if (screenshots.isNotEmpty) {
+      games = response.results as List<Game>;
+      haveNext = response.next != null;
+
+      if (games.isNotEmpty) {
         emit(
           state.copyWith(
-            gameScreenshots: screenshots,
+            games: [...state.games, ...games],
             requestStatus: GamesRequestStatus.success,
           ),
         );

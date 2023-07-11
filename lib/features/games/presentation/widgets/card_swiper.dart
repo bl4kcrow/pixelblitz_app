@@ -109,6 +109,9 @@ class CardSwiper extends StatelessWidget {
         context
             .read<GameScreenshotsBloc>()
             .add(GetInitialScreenshots(id: currentGame.id));
+        context
+            .read<GameSeriesBloc>()
+            .add(GetInitialGameSeries(id: currentGame.id));
         context.goNamed(
           RoutesName.gameDetailsScreen,
           extra: heroId,
@@ -170,6 +173,7 @@ class CardSwiper extends StatelessWidget {
                         ),
                         const SizedBox(height: Insets.medium),
                         PlatformsIconRow(
+                          color: AppColors.white.withOpacity(0.7),
                           platforms: currentGame.platforms,
                         ),
                         const SizedBox(height: Insets.medium),

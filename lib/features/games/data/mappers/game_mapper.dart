@@ -8,6 +8,7 @@ class GameMapper {
         released: rawgGame.released,
         backgroundImage: rawgGame.backgroundImage,
         rating: rawgGame.rating,
+        metacritic: rawgGame.metacritic,
         platforms: rawgGame.platforms
             .map(
               (rawgPlatform) => Platform(

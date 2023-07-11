@@ -47,7 +47,9 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
   void _scrollListener() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange) {
-      context.read<TopListsBloc>().add(GetNext());
+      if (context.read<TopListsBloc>().haveNext) {
+        context.read<TopListsBloc>().add(GetNext());
+      }
     }
   }
 
@@ -159,4 +161,3 @@ class _TopSwiper extends StatelessWidget {
     );
   }
 }
-  

@@ -22,7 +22,7 @@ class HorizontalGameScreenshotsView extends StatelessWidget {
           if (state.requestStatus == GamesRequestStatus.success) {
             return Swiper(
               itemCount: state.gameScreenshots.length,
-              scale: 0.9,
+              scale: 0.8,
               viewportFraction: 0.8,
               itemBuilder: (BuildContext context, int index) {
                 return Container(

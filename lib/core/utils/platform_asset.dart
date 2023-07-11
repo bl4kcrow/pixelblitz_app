@@ -1,4 +1,4 @@
-import 'package:pixelblitz_app/core/constants/constants.dart';
+import '../constants/constants.dart';
 
 enum PlatformAsset {
   android(Labels.android, Assets.androidIcon),

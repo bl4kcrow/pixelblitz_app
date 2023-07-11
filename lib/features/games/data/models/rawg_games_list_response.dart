@@ -1,27 +1,29 @@
+import 'package:pixelblitz_app/features/games/domain/domain.dart';
+
 import '../data.dart';
 
-class RawgGamesListResponse {
+class RawgGamesListResponse extends ApiResponse<List<Game>> {
   RawgGamesListResponse({
-    required this.count,
-    this.next,
-    this.previous,
-    required this.results,
+    required super.count,
+    super.next,
+    super.previous,
+    required super.results,
   });
-
-  final int count;
-  final String? next;
-  final String? previous;
-  final List<RawgGameModel> results;
 
   factory RawgGamesListResponse.fromJson(Map<String, dynamic> json) =>
       RawgGamesListResponse(
         count: json['count'],
         next: json['next'],
         previous: json['previous'],
-        results: List<RawgGameModel>.from(
+        results: List<Game>.from(
           json['results'].map((rawgGame) {
-            return RawgGameModel.fromMap(rawgGame);
-          }),
+              return GameMapper.rawgGameToEntity(
+                RawgGameModel.fromMap(
+                  rawgGame,
+                ),
+              );
+            },
+          ),
         ),
       );
 }

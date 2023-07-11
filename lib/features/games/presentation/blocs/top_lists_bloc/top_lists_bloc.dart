@@ -21,12 +21,15 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
   final GamesRepository gamesRepository;
 
   int currentPage = 0;
+  bool haveNext = false;
 
   void _onGetInitial(
     GetInitial event,
     Emitter<TopListsState> emit,
   ) async {
     try {
+      late final ApiResponse response;
+
       List<Game> games = [];
 
       emit(
@@ -42,14 +45,14 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
 
       switch (event.listType) {
         case GameTopLists.top:
-          games = await gamesRepository.getTop(
+          response = await gamesRepository.getTop(
             from: event.from,
             to: event.to,
             page: currentPage,
           );
           break;
         case GameTopLists.recentReleases:
-          games = await gamesRepository.getRecentReleases(
+          response = await gamesRepository.getRecentReleases(
             from: event.from,
             to: event.to,
             page: currentPage,
@@ -57,19 +60,22 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
           break;
         case GameTopLists.popular:
         case GameTopLists.best:
-          games = await gamesRepository.getPopular(
+          response = await gamesRepository.getPopular(
             from: event.from,
             to: event.to,
             page: currentPage,
           );
           break;
         default:
-          games = await gamesRepository.getPopular(
+          response = await gamesRepository.getPopular(
             from: event.from,
             to: event.to,
             page: currentPage,
           );
       }
+
+      games = response.results as List<Game>;
+      haveNext = response.next != null;
 
       if (games.isNotEmpty) {
         emit(
@@ -93,12 +99,14 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
     Emitter<TopListsState> emit,
   ) async {
     try {
+      late final ApiResponse response;
+
       List<Game> games = [];
 
       currentPage++;
       switch (selectedList) {
         case GameTopLists.top:
-          games = await gamesRepository.getTop(
+          response = await gamesRepository.getTop(
             from: selectedFromDate,
             to: selectedToDate,
             page: currentPage,
@@ -106,19 +114,22 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
           break;
         case GameTopLists.popular:
         case GameTopLists.best:
-          games = await gamesRepository.getPopular(
+          response = await gamesRepository.getPopular(
             from: selectedFromDate,
             to: selectedToDate,
             page: currentPage,
           );
           break;
         default:
-          games = await gamesRepository.getPopular(
+          response = await gamesRepository.getPopular(
             from: selectedFromDate,
             to: selectedToDate,
             page: currentPage,
           );
       }
+
+      games = response.results as List<Game>;
+      haveNext = response.next != null;
 
       if (games.isNotEmpty) {
         emit(

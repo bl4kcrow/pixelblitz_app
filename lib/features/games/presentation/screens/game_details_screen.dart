@@ -78,6 +78,7 @@ class _GameViewsState extends State<_GameViews> {
   final List<String> _chips = [
     Labels.about,
     Labels.info,
+    Labels.gameSeries,
   ];
   final _pageController = PageController(
     initialPage: 0,
@@ -114,6 +115,10 @@ class _GameViewsState extends State<_GameViews> {
     );
   }
 
+  Widget _gameSeriesView() {
+    return const GameSeriesList();
+  }
+
   Widget _infoView() {
     return Text(widget.gameDetails.website);
   }
@@ -142,12 +147,10 @@ class _GameViewsState extends State<_GameViews> {
                   onSelected: (_) {
                     setState(() {
                       _chipSelected = index;
-                      _pageController.animateToPage(
-                        index,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
                     });
+                    _pageController.jumpToPage(
+                      _chipSelected,
+                    );
                   },
                 ),
                 const SizedBox(width: Insets.small),
@@ -164,6 +167,7 @@ class _GameViewsState extends State<_GameViews> {
               children: [
                 _aboutView(),
                 _infoView(),
+                _gameSeriesView(),
               ],
             ),
           ),
@@ -242,6 +246,7 @@ class _GameCard extends StatelessWidget {
                     ),
                     const SizedBox(height: Insets.medium),
                     PlatformsIconRow(
+                      color: AppColors.white.withOpacity(0.7),
                       platforms: gameDetails.platforms,
                     ),
                     const SizedBox(height: Insets.medium),

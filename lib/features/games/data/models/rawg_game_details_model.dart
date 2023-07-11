@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../../../core/constants/constants.dart';
 import '../data.dart';
 
 class RawgGameDetailsModel {
@@ -116,7 +117,7 @@ class RawgGameDetailsModel {
       released:
           json['released'] != null ? DateTime.tryParse(json['released']) : null,
       tba: json['tba'],
-      backgroundImage: json['background_image'],
+      backgroundImage: json['background_image'] ?? AppConstants.noImageUrl,
       backgroundImageAdditional: json['background_image_additional'],
       website: json['website'],
       rating: json['rating']?.toDouble(),

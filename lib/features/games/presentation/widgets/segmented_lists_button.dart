@@ -114,8 +114,10 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
                 ? AppColors.black
                 : AppColors.eerieBlack,
           ),
-          side: const MaterialStatePropertyAll(
-            BorderSide(color: AppColors.charlestonGrey),
+          side: MaterialStatePropertyAll(
+            BorderSide(
+              color: AppColors.white.withOpacity(0.7),
+            ),
           ),
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(

@@ -22,14 +22,18 @@ class NewAndTrendingBloc
     Emitter<NewAndTrendingState> emit,
   ) async {
     try {
-      final games = await gamesRepository.getNewAndTrending(
+      List<Game> games = [];
+
+      final ApiResponse response = await gamesRepository.getNewAndTrending(
         page: event.page,
       );
+
+      games = response.results as List<Game>;
 
       if (games.isNotEmpty) {
         emit(
           state.copyWith(
-            games: [...state.games, ...games],
+            games: games,
             requestStatus: GamesRequestStatus.success,
           ),
         );

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../../../core/constants/constants.dart';
 import '../data.dart';
 
 class RawgGameModel {
@@ -51,10 +52,9 @@ class RawgGameModel {
         id: json['id'],
         name: json['name'],
         released: DateTime.parse(json['released']),
-        backgroundImage: json['background_image'] ??
-            'https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg',
+        backgroundImage: json['background_image'] ?? AppConstants.noImageUrl,
         rating: json['rating']?.toDouble(),
-        metacritic: json['metacritic'],
+        metacritic: json['metacritic']?.toInt(),
         platforms: List<RawgPlatformModel>.from(
           json['platforms']
               .map((platform) => RawgPlatformModel.fromMap(platform)),

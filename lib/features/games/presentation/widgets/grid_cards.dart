@@ -42,6 +42,9 @@ class GridCards extends StatelessWidget {
             context
                 .read<GameScreenshotsBloc>()
                 .add(GetInitialScreenshots(id: game.id));
+            context
+                .read<GameSeriesBloc>()
+                .add(GetInitialGameSeries(id: game.id));
             context.goNamed(
               RoutesName.gameDetailsScreen,
               extra: heroId,

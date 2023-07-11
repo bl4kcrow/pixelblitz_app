@@ -26,17 +26,18 @@ final appRouter = GoRouter(
           navigatorKey: _shellNavigatorAKey,
           routes: [
             GoRoute(
-                path: RoutesName.homeScreen,
-                builder: (context, state) => const HomeScreen(),
-                routes: [
-                  GoRoute(
-                    name: RoutesName.gameDetailsScreen,
-                    path: RoutesName.gameDetailsScreen,
-                    builder: (context, state) => GameDetailsScreen(
-                      heroId: state.extra as String,
-                    ),
-                  )
-                ]),
+              path: RoutesName.homeScreen,
+              builder: (context, state) => const HomeScreen(),
+              routes: [
+                GoRoute(
+                  name: RoutesName.gameDetailsScreen,
+                  path: RoutesName.gameDetailsScreen,
+                  builder: (context, state) => GameDetailsScreen(
+                    heroId: state.extra as String,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
         StatefulShellBranch(

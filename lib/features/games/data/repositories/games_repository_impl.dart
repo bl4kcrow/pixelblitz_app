@@ -28,7 +28,18 @@ class GamesRepositoryImpl implements GamesRepository {
   }
 
   @override
-  Future<List<Game>> getNewAndTrending({
+  Future<ApiResponse> getGameSeries({
+    required int id,
+    int page = 1,
+  }) async {
+    return gamesDatasource.getGameSeries(
+      id: id,
+      page: page,
+    );
+  }
+
+  @override
+  Future<ApiResponse> getNewAndTrending({
     int page = 1,
   }) async {
     return gamesDatasource.getNewAndTrending(
@@ -37,7 +48,7 @@ class GamesRepositoryImpl implements GamesRepository {
   }
   
   @override
-  Future<List<Game>> getPopular({
+  Future<ApiResponse> getPopular({
     required DateTime from,
     required DateTime to,
     int page = 1,
@@ -50,7 +61,7 @@ class GamesRepositoryImpl implements GamesRepository {
   }
   
   @override
-  Future<List<Game>> getRecentReleases({
+  Future<ApiResponse> getRecentReleases({
     required DateTime from,
     required DateTime to,
     int page = 1,
@@ -63,7 +74,7 @@ class GamesRepositoryImpl implements GamesRepository {
   }
 
   @override
-  Future<List<Game>> getTop({
+  Future<ApiResponse> getTop({
     required DateTime from,
     required DateTime to,
     int page = 1,

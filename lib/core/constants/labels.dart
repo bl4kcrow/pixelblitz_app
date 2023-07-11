@@ -10,12 +10,14 @@ class Labels {
   static const favourites = 'Favourites';
   static const gameBoy = 'game-boy';
   static const gamecube = 'gamecube';
+  static const gameSeries = 'Game Series';
   static const home = 'Home';
   static const info = 'Info';
   static const iOS = 'ios';
   static const linux = 'linux';
   static const macintosh = 'macintosh';
   static const macos = 'macos';
+  static const metacritic = 'Metacritic';
   static const nes = 'nes';
   static const nintendoSwitch = 'nintendo-switch';
   static const nintendo = 'nintendo';
