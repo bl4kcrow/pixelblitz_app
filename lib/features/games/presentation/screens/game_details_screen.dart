@@ -120,7 +120,9 @@ class _GameViewsState extends State<_GameViews> {
   }
 
   Widget _infoView() {
-    return Text(widget.gameDetails.website);
+    return SingleChildScrollView(
+      child: GameInfoTable(gameDetails: widget.gameDetails),
+    );
   }
 
   @override

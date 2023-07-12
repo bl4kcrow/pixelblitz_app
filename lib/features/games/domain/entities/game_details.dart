@@ -15,7 +15,7 @@ class GameDetails {
   final bool tba;
   final String backgroundImage;
   final String? backgroundImageAdditional;
-  final String website;
+  final String? website;
   final double rating;
   final String saturatedColor;
   final String dominantColor;
@@ -39,7 +39,7 @@ class GameDetails {
     required this.tba,
     required this.backgroundImage,
     this.backgroundImageAdditional,
-    required this.website,
+    this.website,
     required this.rating,
     required this.saturatedColor,
     required this.dominantColor,
@@ -110,7 +110,6 @@ class GameDetails {
         descriptionRaw: Labels.notApplicable,
         tba: false,
         backgroundImage: Labels.notApplicable,
-        website: Labels.notApplicable,
         rating: 0.0,
         saturatedColor: AppColors.maroon.value.toString(),
         dominantColor: AppColors.eerieBlack.value.toString(),

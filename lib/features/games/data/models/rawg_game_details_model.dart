@@ -15,7 +15,7 @@ class RawgGameDetailsModel {
   final bool tba;
   final String backgroundImage;
   final String? backgroundImageAdditional;
-  final String website;
+  final String? website;
   final double rating;
   final String saturatedColor;
   final String dominantColor;
@@ -39,7 +39,7 @@ class RawgGameDetailsModel {
     required this.tba,
     required this.backgroundImage,
     this.backgroundImageAdditional,
-    required this.website,
+    this.website,
     required this.rating,
     required this.saturatedColor,
     required this.dominantColor,

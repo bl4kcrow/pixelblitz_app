@@ -21,6 +21,7 @@ class Labels {
   static const nes = 'nes';
   static const nintendoSwitch = 'nintendo-switch';
   static const nintendo = 'nintendo';
+  static const noGameSeries = 'Oh!, No game series found';
   static const notApplicable = 'N/A';
   static const pc = 'pc';
   static const platforms = 'Platforms';

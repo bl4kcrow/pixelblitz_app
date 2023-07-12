@@ -13,6 +13,8 @@ export 'screens/platforms_screen.dart';
 export 'widgets/card_swiper.dart';
 export 'widgets/grid_cards.dart';
 export 'widgets/horizontal_game_screenshots_view.dart';
+export 'widgets/game_info_table.dart';
 export 'widgets/game_series_list.dart';
+export 'widgets/no_data_animation.dart';
 export 'widgets/platforms_icon_row.dart';
 export 'widgets/segmented_lists_button.dart';

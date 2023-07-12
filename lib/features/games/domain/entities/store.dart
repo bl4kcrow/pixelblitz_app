@@ -23,4 +23,9 @@ class Store {
         slug: slug ?? this.slug,
         domain: domain ?? this.domain,
       );
+  
+  @override
+  String toString() {
+    return name;
+  }
 }
