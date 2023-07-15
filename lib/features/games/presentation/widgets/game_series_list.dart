@@ -80,7 +80,7 @@ class _GameSeriesListState extends State<GameSeriesList> {
                       context
                           .read<GameSeriesBloc>()
                           .add(GetInitialGameSeries(id: currentGame.id));
-                      context.goNamed(
+                      context.pushNamed(
                         RoutesName.gameDetailsScreen,
                         extra: heroId,
                       );

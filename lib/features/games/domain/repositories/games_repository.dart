@@ -4,7 +4,7 @@ abstract class GamesRepository {
   Future<GameDetails> getGameDetails({
     required int id,
   });
-
+  
   Future<List<GameScreenshot>> getGameScreenshots({
     required int id,
     int page = 1,
@@ -15,6 +15,11 @@ abstract class GamesRepository {
     int page = 1,
   });
 
+  Future<ApiResponse> getGamesByPlatform({
+    required List<int> platformIds,
+    int page = 1,
+  });
+  
   Future<ApiResponse> getNewAndTrending({
     int page = 1,
   });

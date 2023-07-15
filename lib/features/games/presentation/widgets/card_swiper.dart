@@ -46,7 +46,7 @@ class _InactiveSwiperLine extends StatelessWidget {
       width: itemSize - Insets.xsmall,
       margin: const EdgeInsets.symmetric(horizontal: Insets.xsmall / 2),
       decoration: BoxDecoration(
-        color: AppColors.charlestonGrey,
+        color: AppColors.white.withOpacity(0.5),
         borderRadius: BorderRadius.circular(2.0),
       ),
     );
@@ -112,7 +112,7 @@ class CardSwiper extends StatelessWidget {
         context
             .read<GameSeriesBloc>()
             .add(GetInitialGameSeries(id: currentGame.id));
-        context.goNamed(
+        context.pushNamed(
           RoutesName.gameDetailsScreen,
           extra: heroId,
         );
@@ -129,8 +129,6 @@ class CardSwiper extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: currentGame.backgroundImage,
                     fit: BoxFit.cover,
-                    memCacheHeight: 2160,
-                    memCacheWidth: 3840,
                   ),
                 ),
               ),

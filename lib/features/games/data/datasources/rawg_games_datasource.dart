@@ -6,7 +6,7 @@ import '../../domain/domain.dart';
 import '../data.dart';
 
 class RawgGamesDatasource implements GamesDatasource {
-  final int pageSize = 15;
+  final int pageSize = 16;
   final _dio = Dio(
     BaseOptions(
       baseUrl: 'https://api.rawg.io/api',
@@ -67,7 +67,32 @@ class RawgGamesDatasource implements GamesDatasource {
       '/games/$id/game-series',
       queryParameters: {
         'page': page,
+        'page_size': pageSize,
       },
+    );
+
+    return RawgGamesListResponse.fromJson(response.data);
+  }
+
+  @override
+  Future<ApiResponse> getGamesByPlatform({
+    required List<int> platformIds,
+    int page = 1,
+  }) async {
+    final Map<String, dynamic> queryParameters = {
+      'ordering': '-added',
+      'page': page,
+      'page_size': pageSize,
+    };
+
+    if (platformIds.isNotEmpty) {
+      final platformsSelected = platformIds.join(', ');
+      queryParameters['platforms'] = platformsSelected;
+    }
+
+    final response = await _dio.get(
+      '/games',
+      queryParameters: queryParameters,
     );
 
     return RawgGamesListResponse.fromJson(response.data);

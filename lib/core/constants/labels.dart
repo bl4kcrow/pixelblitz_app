@@ -7,7 +7,6 @@ class Labels {
   static const atari = 'atari';
   static const best = 'BEST';
   static const collections = 'Collections';
-  static const favourites = 'Favourites';
   static const gameBoy = 'game-boy';
   static const gamecube = 'gamecube';
   static const gameSeries = 'Game Series';

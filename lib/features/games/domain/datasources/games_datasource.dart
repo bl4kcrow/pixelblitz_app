@@ -5,10 +5,16 @@ abstract class GamesDatasource {
     required int id,
   });
 
+  Future<ApiResponse> getGamesByPlatform({
+    required List<int> platformIds,
+    int page = 1,
+  });
+  
   Future<List<GameScreenshot>> getGameScreenshots({
     required int id,
     int page = 1,
   });
+
 
   Future<ApiResponse> getGameSeries({
     required int id,

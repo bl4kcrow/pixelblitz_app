@@ -125,7 +125,8 @@ class RawgGameDetailsModel {
       dominantColor: json['dominant_color'],
       platforms: List<RawgPlatformModel>.from(
         json['platforms']
-            .map((platform) => RawgPlatformModel.fromMap(platform)),
+            .map(
+            (platforms) => RawgPlatformModel.fromMap(platforms['platform'])),
       ),
       developers: List<RawgDeveloperModel>.from(
         json['developers']

@@ -19,8 +19,19 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => GamesRepositoryImpl(RawgGamesDatasource()),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => GamesRepositoryImpl(
+            RawgGamesDatasource(),
+          ),
+        ),
+        RepositoryProvider(
+          create: (context) => PlatformsRepositoryImpl(
+            RawgPlatformsDatasource(),
+          ),
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -52,6 +63,14 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 GameSeriesBloc(context.read<GamesRepositoryImpl>()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                PlatformsBloc(context.read<PlatformsRepositoryImpl>()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                GamesByPlatformBloc(context.read<GamesRepositoryImpl>()),
           ),
         ],
         child: MaterialApp.router(

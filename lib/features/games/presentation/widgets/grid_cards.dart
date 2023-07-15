@@ -28,7 +28,7 @@ class GridCards extends StatelessWidget {
         childAspectRatio: 16 / 9,
         crossAxisCount: 2,
         mainAxisSpacing: Insets.medium,
-        crossAxisSpacing: Insets.small,
+        crossAxisSpacing: Insets.medium,
       ),
       itemBuilder: (context, index) {
         final Game game = games[index];
@@ -45,7 +45,7 @@ class GridCards extends StatelessWidget {
             context
                 .read<GameSeriesBloc>()
                 .add(GetInitialGameSeries(id: game.id));
-            context.goNamed(
+            context.pushNamed(
               RoutesName.gameDetailsScreen,
               extra: heroId,
             );
@@ -58,23 +58,21 @@ class GridCards extends StatelessWidget {
                 SizedBox.expand(
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(5.0),
                       boxShadow: const [
                         BoxShadow(
-                          color: AppColors.black,
+                          color: AppColors.charlestonGrey,
                           spreadRadius: 1.0,
                           blurRadius: 3.0,
-                          offset: Offset(0.0, 0.0),
+                          offset: Offset(0.0, 3.0),
                         ),
                       ],
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(5.0),
                       child: CachedNetworkImage(
                         imageUrl: game.backgroundImage,
                         fit: BoxFit.cover,
-                        memCacheHeight: 2160,
-                        memCacheWidth: 3840,
                       ),
                     ),
                   ),
@@ -82,7 +80,7 @@ class GridCards extends StatelessWidget {
                 SizedBox.expand(
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(5.0),
                       gradient: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,

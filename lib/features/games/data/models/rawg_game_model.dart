@@ -57,7 +57,8 @@ class RawgGameModel {
         metacritic: json['metacritic']?.toInt(),
         platforms: List<RawgPlatformModel>.from(
           json['platforms']
-              .map((platform) => RawgPlatformModel.fromMap(platform)),
+              .map(
+              (platforms) => RawgPlatformModel.fromMap(platforms['platform'])),
         ),
         genres: List<RawgGenreModel>.from(
           json['genres'].map((genre) => RawgGenreModel.fromMap(genre)),

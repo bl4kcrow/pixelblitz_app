@@ -39,6 +39,17 @@ class GamesRepositoryImpl implements GamesRepository {
   }
 
   @override
+  Future<ApiResponse> getGamesByPlatform({
+    required List<int> platformIds,
+    int page = 1,
+  }) {
+    return gamesDatasource.getGamesByPlatform(
+      platformIds: platformIds,
+      page: page,
+    );
+  }
+
+  @override
   Future<ApiResponse> getNewAndTrending({
     int page = 1,
   }) async {

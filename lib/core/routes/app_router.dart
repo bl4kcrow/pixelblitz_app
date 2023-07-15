@@ -9,7 +9,6 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorAKey = GlobalKey<NavigatorState>(debugLabel: 'shellA');
 final _shellNavigatorBKey = GlobalKey<NavigatorState>(debugLabel: 'shellB');
 final _shellNavigatorCKey = GlobalKey<NavigatorState>(debugLabel: 'shellC');
-final _shellNavigatorDKey = GlobalKey<NavigatorState>(debugLabel: 'shellD');
 
 final appRouter = GoRouter(
   initialLocation: RoutesName.homeScreen,
@@ -55,15 +54,6 @@ final appRouter = GoRouter(
             GoRoute(
               path: RoutesName.collectionsScreen,
               builder: (context, state) => const CollectionsScreen(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          navigatorKey: _shellNavigatorDKey,
-          routes: [
-            GoRoute(
-              path: RoutesName.favouritesScreen,
-              builder: (context, state) => const FavouritesScreen(),
             ),
           ],
         ),

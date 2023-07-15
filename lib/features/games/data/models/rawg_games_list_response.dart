@@ -1,5 +1,4 @@
-import 'package:pixelblitz_app/features/games/domain/domain.dart';
-
+import '../../domain/domain.dart';
 import '../data.dart';
 
 class RawgGamesListResponse extends ApiResponse<List<Game>> {

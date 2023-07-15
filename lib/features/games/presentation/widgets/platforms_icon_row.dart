@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pixelblitz_app/features/games/presentation/presentation.dart';
 
 import '../../../../core/theme/theme.dart';
 import '../../../../core/utils/utils.dart';
@@ -28,14 +28,10 @@ class PlatformsIconRow extends StatelessWidget {
   Widget _svgIcon(String assetName) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: separatorSize),
-      child: SvgPicture.asset(
-        assetName,
-        colorFilter: ColorFilter.mode(
-          color,
-          BlendMode.srcIn,
-        ),
-        height: iconSize,
-        width: iconSize,
+      child: SvgIcon(
+        path: assetName,
+        color: color,
+        iconSize: iconSize,
       ),
     );
   }

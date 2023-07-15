@@ -1,7 +1,9 @@
 export 'datasources/rawg_games_datasource.dart';
+export 'datasources/rawg_platforms_datasource.dart';
 
 export 'mappers/game_details_mapper.dart';
 export 'mappers/game_mapper.dart';
+export 'mappers/platform_mapper.dart';
 export 'mappers/game_screenshot_mapper.dart';
 
 export 'models/rawg_developer_model.dart';
@@ -17,3 +19,4 @@ export 'models/rawg_store_model.dart';
 export 'models/rawg_tag_model.dart';
 
 export 'repositories/games_repository_impl.dart';
+export 'repositories/platforms_repository_impl.dart';
