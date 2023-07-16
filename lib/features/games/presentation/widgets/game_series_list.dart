@@ -80,7 +80,7 @@ class _GameSeriesListState extends State<GameSeriesList> {
                       context
                           .read<GameSeriesBloc>()
                           .add(GetInitialGameSeries(id: currentGame.id));
-                      context.pushNamed(
+                      context.pushReplacementNamed(
                         RoutesName.gameDetailsScreen,
                         extra: heroId,
                       );
@@ -114,14 +114,16 @@ class _GameSeriesListState extends State<GameSeriesList> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 const SizedBox(height: Insets.medium),
-                                Text(
-                                  DateFormat.yMMMd()
-                                      .format(currentGame.released),
-                                  style: textTheme.bodyMedium?.copyWith(
-                                    color: AppColors.melon,
+                                if (currentGame.released != null) ...[
+                                  Text(
+                                    DateFormat.yMMMd()
+                                        .format(currentGame.released!),
+                                    style: textTheme.bodyMedium?.copyWith(
+                                      color: AppColors.melon,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: Insets.xsmall),
+                                  const SizedBox(height: Insets.xsmall),
+                                ],
                                 if (currentGame.metacritic != null) ...[
                                   RichText(
                                     text: TextSpan(

@@ -34,6 +34,7 @@ final appRouter = GoRouter(
                   builder: (context, state) => GameDetailsScreen(
                     heroId: state.extra as String,
                   ),
+                  
                 ),
               ],
             ),
@@ -45,6 +46,14 @@ final appRouter = GoRouter(
             GoRoute(
               path: RoutesName.platformsScreen,
               builder: (context, state) => const PlatformsScreen(),
+              routes: [
+                GoRoute(
+                  path: RoutesName.gameDetailsScreen,
+                  builder: (context, state) => GameDetailsScreen(
+                    heroId: state.extra as String,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

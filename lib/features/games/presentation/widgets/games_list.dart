@@ -95,7 +95,9 @@ class GamesList extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          'Release Date: ${DateFormat.yMMMd().format(game.released)}',
+                          game.released != null
+                              ? 'Release Date: ${DateFormat.yMMMd().format(game.released!)}'
+                              : 'Release Date: ${Labels.notApplicable}',
                           style: textTheme.bodySmall?.copyWith(
                             color: AppColors.white.withOpacity(0.9),
                           ),

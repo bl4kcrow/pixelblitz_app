@@ -3,7 +3,7 @@ import '../domain.dart';
 class Game {
   final int id;
   final String name;
-  final DateTime released;
+  final DateTime? released;
   final String backgroundImage;
   final double rating;
   final int? metacritic;
@@ -13,7 +13,7 @@ class Game {
   Game({
     required this.id,
     required this.name,
-    required this.released,
+    this.released,
     required this.backgroundImage,
     required this.rating,
     this.metacritic,

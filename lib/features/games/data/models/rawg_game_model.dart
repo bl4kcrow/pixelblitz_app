@@ -1,12 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 import '../../../../core/constants/constants.dart';
 import '../data.dart';
 
 class RawgGameModel {
   final int id;
   final String name;
-  final DateTime released;
+  final DateTime? released;
   final String backgroundImage;
   final double rating;
   final int? metacritic;
@@ -16,7 +18,7 @@ class RawgGameModel {
   RawgGameModel({
     required this.id,
     required this.name,
-    required this.released,
+    this.released,
     required this.backgroundImage,
     required this.rating,
     this.metacritic,
@@ -48,20 +50,23 @@ class RawgGameModel {
   factory RawgGameModel.fromJson(String str) =>
       RawgGameModel.fromMap(json.decode(str));
 
-  factory RawgGameModel.fromMap(Map<String, dynamic> json) => RawgGameModel(
-        id: json['id'],
-        name: json['name'],
-        released: DateTime.parse(json['released']),
-        backgroundImage: json['background_image'] ?? AppConstants.noImageUrl,
-        rating: json['rating']?.toDouble(),
-        metacritic: json['metacritic']?.toInt(),
-        platforms: List<RawgPlatformModel>.from(
-          json['platforms']
-              .map(
-              (platforms) => RawgPlatformModel.fromMap(platforms['platform'])),
-        ),
-        genres: List<RawgGenreModel>.from(
-          json['genres'].map((genre) => RawgGenreModel.fromMap(genre)),
-        ),
-      );
+  factory RawgGameModel.fromMap(Map<String, dynamic> json) {
+    debugPrint('GAME');
+    return RawgGameModel(
+      id: json['id'],
+      name: json['name'],
+      released:
+          json['released'] != null ? DateTime.tryParse(json['released']) : null,
+      backgroundImage: json['background_image'] ?? AppConstants.noImageUrl,
+      rating: json['rating']?.toDouble(),
+      metacritic: json['metacritic']?.toInt(),
+      platforms: List<RawgPlatformModel>.from(
+        json['platforms'].map(
+            (platforms) => RawgPlatformModel.fromMap(platforms['platform'])),
+      ),
+      genres: List<RawgGenreModel>.from(
+        json['genres'].map((genre) => RawgGenreModel.fromMap(genre)),
+      ),
+    );
+  }
 }
