@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../core/utils/utils.dart';
 import '../presentation.dart';
@@ -46,7 +47,7 @@ class _GenresScreenState extends State<GenresScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Genres'),
+        title: const Text(Labels.genres),
         centerTitle: true,
       ),
       body: Padding(

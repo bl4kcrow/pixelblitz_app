@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/theme/theme.dart';
 import '../presentation.dart';
@@ -44,7 +45,7 @@ class _PlatformsScreenState extends State<PlatformsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Platforms'),
+        title: const Text(Labels.platforms),
         centerTitle: true,
       ),
       body: Padding(
