@@ -46,8 +46,8 @@ class NestedBottomNavigationBar extends StatelessWidget {
               icon: FaIcon(FontAwesomeIcons.computer),
             ),
             BottomNavigationBarItem(
-              label: Labels.collections,
-              icon: FaIcon(FontAwesomeIcons.gamepad),
+              label: Labels.genres,
+              icon: FaIcon(FontAwesomeIcons.shieldHalved),
             ),
           ],
           onTap: (value) => _goBranch(value),

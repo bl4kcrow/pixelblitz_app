@@ -15,6 +15,11 @@ abstract class GamesRepository {
     int page = 1,
   });
 
+  Future<ApiResponse> getGamesByGenre({
+    required List<int> genreIds,
+    int page = 1,
+  });
+
   Future<ApiResponse> getGamesByPlatform({
     required List<int> platformIds,
     int page = 1,

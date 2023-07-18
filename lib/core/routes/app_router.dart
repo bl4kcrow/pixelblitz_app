@@ -61,8 +61,16 @@ final appRouter = GoRouter(
           navigatorKey: _shellNavigatorCKey,
           routes: [
             GoRoute(
-              path: RoutesName.collectionsScreen,
-              builder: (context, state) => const CollectionsScreen(),
+              path: RoutesName.genresScreen,
+              builder: (context, state) => const GenresScreen(),
+              routes: [
+                GoRoute(
+                  path: RoutesName.gameDetailsScreen,
+                  builder: (context, state) => GameDetailsScreen(
+                    heroId: state.extra as String,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

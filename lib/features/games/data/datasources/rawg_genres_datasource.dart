@@ -4,7 +4,7 @@ import '../../../../core/constants/constants.dart';
 import '../../domain/domain.dart';
 import '../data.dart';
 
-class RawgPlatformsDatasource implements PlatformsDatasource {
+class RawgGenresDatasource implements GenresDatasource {
   final int pageSize = 20;
   final _dio = Dio(
     BaseOptions(
@@ -16,17 +16,18 @@ class RawgPlatformsDatasource implements PlatformsDatasource {
   );
 
   @override
-  Future<ApiResponse> getPlatforms({
+  Future<ApiResponse> getGenres({
     int page = 1,
   }) async {
     final response = await _dio.get(
-      '/platforms',
+      '/genres',
       queryParameters: {
+        'ordering': 'name',
         'page': page,
         'page_size': pageSize,
       },
     );
 
-    return RawgPlatformsResponse.fromJson(response.data);
+    return RawgGenresResponse.fromJson(response.data);
   }
 }

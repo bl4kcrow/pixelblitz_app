@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utils/utils.dart';
 import '../../../../core/theme/theme.dart';
+import '../../../../core/utils/utils.dart';
 import '../presentation.dart';
 
-class PlatformsScreen extends StatefulWidget {
-  const PlatformsScreen({super.key});
+class GenresScreen extends StatefulWidget {
+  const GenresScreen({super.key});
 
   @override
-  State<PlatformsScreen> createState() => _PlatformsScreenState();
+  State<GenresScreen> createState() => _GenresScreenState();
 }
 
-class _PlatformsScreenState extends State<PlatformsScreen> {
+class _GenresScreenState extends State<GenresScreen> {
   final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    context.read<PlatformsBloc>().add(GetInitialPlatforms());
+    context.read<GenresBloc>().add(GetInitialGenres());
     context
-        .read<GamesByPlatformBloc>()
-        .add(GetInitialGamesByPlatform(platformIds: const []));
+        .read<GamesByGenreBloc>()
+        .add(GetInitialGamesByGenre(genresIds: const []));
     scrollController.addListener(_scrollListener);
   }
 
   void _scrollListener() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange) {
-      if (context.read<GamesByPlatformBloc>().haveNext) {
-        context.read<GamesByPlatformBloc>().add(GetNextGamesByPlatform());
+      if (context.read<GamesByGenreBloc>().haveNext) {
+        context.read<GamesByGenreBloc>().add(GetNextGamesByGenre());
       }
     }
   }
@@ -42,18 +42,23 @@ class _PlatformsScreenState extends State<PlatformsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Platforms'),
+        title: const Text('Genres'),
         centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
         child: Column(
           children: [
-            const HorizontalPlatformsList(),
+            SizedBox(
+              height: screenSize.width * 0.5,
+              child: const HorizontalGenresGridList(),
+            ),
             Expanded(
-              child: BlocBuilder<GamesByPlatformBloc, GamesByPlatformState>(
+              child: BlocBuilder<GamesByGenreBloc, GamesByGenreState>(
                 builder: (context, state) {
                   if (state.requestStatus == GamesRequestStatus.success) {
                     return GamesList(

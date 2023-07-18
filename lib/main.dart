@@ -31,6 +31,11 @@ class App extends StatelessWidget {
             RawgPlatformsDatasource(),
           ),
         ),
+        RepositoryProvider(
+          create: (context) => GenresRepositoryImpl(
+            RawgGenresDatasource(),
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -71,6 +76,14 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 GamesByPlatformBloc(context.read<GamesRepositoryImpl>()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                GenresBloc(context.read<GenresRepositoryImpl>()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                GamesByGenreBloc(context.read<GamesRepositoryImpl>()),
           ),
         ],
         child: MaterialApp.router(

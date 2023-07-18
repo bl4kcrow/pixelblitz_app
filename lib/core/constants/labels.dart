@@ -7,9 +7,11 @@ class Labels {
   static const atari = 'atari';
   static const best = 'BEST';
   static const collections = 'Collections';
+  static const clearAll = 'Clear All';
   static const gameBoy = 'game-boy';
   static const gamecube = 'gamecube';
   static const gameSeries = 'Game Series';
+  static const genres = 'Genres';
   static const home = 'Home';
   static const info = 'Info';
   static const iOS = 'ios';

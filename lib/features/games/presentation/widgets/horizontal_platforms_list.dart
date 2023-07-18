@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../core/utils/utils.dart';
 import '../../domain/domain.dart';
@@ -158,10 +159,13 @@ class _HorizontalPlatformsListState extends State<HorizontalPlatformsList> {
 
                   setState(() {});
                 },
-                child: Text(
-                  'Clear All',
-                  style: textTheme.labelMedium?.copyWith(
-                    color: AppColors.melon,
+                child: Padding(
+                  padding: const EdgeInsets.all(Insets.small),
+                  child: Text(
+                    Labels.clearAll,
+                    style: textTheme.labelMedium?.copyWith(
+                      color: AppColors.melon,
+                    ),
                   ),
                 ),
               ),

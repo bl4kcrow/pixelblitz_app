@@ -75,6 +75,30 @@ class RawgGamesDatasource implements GamesDatasource {
   }
 
   @override
+  Future<ApiResponse> getGamesByGenre({
+    required List<int> genreIds,
+    int page = 1,
+  }) async {
+    final Map<String, dynamic> queryParameters = {
+      'ordering': '-added',
+      'page': page,
+      'page_size': pageSize,
+    };
+
+    if (genreIds.isNotEmpty) {
+      final genresSelected = genreIds.join(', ');
+      queryParameters['genres'] = genresSelected;
+    }
+
+    final response = await _dio.get(
+      '/games',
+      queryParameters: queryParameters,
+    );
+
+    return RawgGamesListResponse.fromJson(response.data);
+  }
+
+  @override
   Future<ApiResponse> getGamesByPlatform({
     required List<int> platformIds,
     int page = 1,
