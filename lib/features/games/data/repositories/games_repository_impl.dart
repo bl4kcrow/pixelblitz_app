@@ -107,4 +107,15 @@ class GamesRepositoryImpl implements GamesRepository {
       page: page,
     );
   }
+
+  @override
+  Future<ApiResponse> search({
+    required String searchQuery,
+    int page = 1,
+  }) async {
+    return gamesDatasource.search(
+      searchQuery: searchQuery,
+      page: page,
+    );
+  }
 }

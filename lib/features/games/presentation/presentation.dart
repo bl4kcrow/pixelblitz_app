@@ -6,7 +6,10 @@ export 'blocs/games_by_platform_bloc/games_by_platform_bloc.dart';
 export 'blocs/genres_bloc/genres_bloc.dart';
 export 'blocs/new_and_trending_bloc/new_and_trending_bloc.dart';
 export 'blocs/platforms_bloc/platforms_bloc.dart';
+export 'blocs/search_games_bloc/search_games_bloc.dart';
 export 'blocs/top_lists_bloc/top_lists_bloc.dart';
+
+export 'delegates/games_search_delegate.dart';
 
 export 'screens/genres_screen.dart';
 export 'screens/game_details_screen.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../core/theme/theme.dart';
 import '../../../../core/utils/utils.dart';
@@ -150,8 +151,36 @@ class _TopSwiper extends StatelessWidget {
           height: screenSize.height * 0.4,
           width: double.maxFinite,
           child: state.requestStatus == GamesRequestStatus.success
-              ? CardSwiper(
-                  games: state.games,
+              ? Stack(
+                  children: [
+                    CardSwiper(
+                      games: state.games,
+                    ),
+                    Positioned(
+                      right: Insets.medium,
+                      top: screenSize.height * 0.07,
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.white.withOpacity(0.8),
+                        radius: 20,
+                        child: IconButton(
+                          onPressed: () {
+                            showSearch(
+                              query: context
+                                  .read<SearchGamesBloc>()
+                                  .currentSearchQuery,
+                              context: context,
+                              delegate: GamesSearchDelegate(),
+                            );
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.magnifyingGlass,
+                            color: AppColors.black,
+                            size: IconSize.medium,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 )
               : AppShimmer(
                   child: _shimmerBody(screenSize),

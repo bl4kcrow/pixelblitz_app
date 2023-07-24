@@ -34,6 +34,7 @@ class Labels {
   static const psVita = 'ps-vita';
   static const questionMark = '?';
   static const recent = 'RECENT';
+  static const searchGames = 'Search games';
   static const sega = 'sega';
   static const snapshots = 'SNAPSHOTS';
   static const snes = 'snes';

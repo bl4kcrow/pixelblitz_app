@@ -207,4 +207,21 @@ class RawgGamesDatasource implements GamesDatasource {
 
     return RawgGamesListResponse.fromJson(response.data);
   }
+
+  @override
+  Future<ApiResponse> search({
+    required String searchQuery,
+    int page = 1,
+  }) async {
+    final response = await _dio.get(
+      '/games',
+      queryParameters: {
+        'page': page,
+        'page_size': pageSize,
+        'search': searchQuery,
+      },
+    );
+
+    return RawgGamesListResponse.fromJson(response.data);
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/utils/utils.dart';
@@ -47,6 +48,20 @@ class _PlatformsScreenState extends State<PlatformsScreen> {
       appBar: AppBar(
         title: const Text(Labels.platforms),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(
+                query: context.read<SearchGamesBloc>().currentSearchQuery,
+                context: context,
+                delegate: GamesSearchDelegate(),
+              );
+            },
+            icon: const FaIcon(
+              FontAwesomeIcons.magnifyingGlass,
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Insets.medium),

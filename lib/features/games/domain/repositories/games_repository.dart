@@ -46,4 +46,9 @@ abstract class GamesRepository {
     required DateTime to,
     int page = 1,
   });
+
+  Future<ApiResponse> search({
+    required String searchQuery,
+    int page = 1,
+  });
 }
