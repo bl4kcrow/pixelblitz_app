@@ -8,6 +8,7 @@ class Labels {
   static const best = 'BEST';
   static const collections = 'Collections';
   static const clearAll = 'Clear All';
+  static const esrbRating = 'ESRB Rating';
   static const gameBoy = 'game-boy';
   static const gamecube = 'gamecube';
   static const gameSeries = 'Game Series';
@@ -19,6 +20,7 @@ class Labels {
   static const macintosh = 'macintosh';
   static const macos = 'macos';
   static const metacritic = 'Metacritic';
+  static const metacriticUrl = 'Metacritic URL';
   static const nes = 'nes';
   static const nintendoSwitch = 'nintendo-switch';
   static const nintendo = 'nintendo';
@@ -32,13 +34,19 @@ class Labels {
   static const playstation = 'playstation';
   static const popular = 'POPULAR';
   static const psVita = 'ps-vita';
+  static const publishers = 'Publishers';
   static const questionMark = '?';
+  static const rating = 'Rating';
   static const recent = 'RECENT';
+  static const releaseDate = 'Release Date';
   static const searchGames = 'Search games';
   static const sega = 'sega';
   static const snapshots = 'SNAPSHOTS';
   static const snes = 'snes';
+  static const stores = 'Stores';
+  static const tags = 'Tags';
   static const top = 'TOP';
+  static const website = 'Website';
   static const wiiU = 'wii-u';
   static const wii = 'wii';
   static const windows = 'windows';

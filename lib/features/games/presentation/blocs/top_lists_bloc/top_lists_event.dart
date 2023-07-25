@@ -7,7 +7,7 @@ class GetInitial extends TopListsEvent {
   GetInitial({
     required this.from,
     required this.to,
-    this.listType = GameTopLists.popular,
+    this.listType = GameTopLists.recentReleases,
   });
 
   final DateTime from;

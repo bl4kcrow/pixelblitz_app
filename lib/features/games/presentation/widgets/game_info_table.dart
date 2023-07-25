@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/theme/theme.dart';
 import '../../domain/domain.dart';
+import '../presentation.dart';
 
 class GameInfoTable extends StatelessWidget {
   const GameInfoTable({
@@ -73,7 +74,7 @@ class GameInfoTable extends StatelessWidget {
       children: [
         TableRow(
           children: [
-            _leftSideText('Release Date:'),
+            _leftSideText('${Labels.releaseDate}:'),
             gameDetails.released != null
                 ? _rightSideText(
                     DateFormat.yMMMd().format(gameDetails.released!))
@@ -82,7 +83,7 @@ class GameInfoTable extends StatelessWidget {
         ),
         TableRow(
           children: [
-            _leftSideText('Website:'),
+            _leftSideText('${Labels.website}:'),
             gameDetails.website?.isNotEmpty == true
                 ? _urlText(gameDetails.website!)
                 : _rightSideText(Labels.notApplicable),
@@ -90,7 +91,7 @@ class GameInfoTable extends StatelessWidget {
         ),
         TableRow(
           children: [
-            _leftSideText('Metacritic:'),
+            _leftSideText('${Labels.metacritic}:'),
             gameDetails.metacritic != null
                 ? _rightSideText(gameDetails.metacritic.toString())
                 : _rightSideText(Labels.notApplicable),
@@ -98,7 +99,7 @@ class GameInfoTable extends StatelessWidget {
         ),
         TableRow(
           children: [
-            _leftSideText('Metacritic URL:'),
+            _leftSideText('${Labels.metacriticUrl}:'),
             gameDetails.metacriticUrl?.isNotEmpty == true
                 ? _urlText(gameDetails.metacriticUrl!)
                 : _rightSideText(Labels.notApplicable),
@@ -106,25 +107,40 @@ class GameInfoTable extends StatelessWidget {
         ),
         TableRow(
           children: [
-            _leftSideText('Rating:'),
-            _rightSideText(gameDetails.rating.toString()),
+            _leftSideText('${Labels.rating}:'),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _rightSideText(gameDetails.rating.toString()),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: Insets.xsmall,
+                    left: Insets.xsmall,
+                  ),
+                  child: StarRating(
+                    value: gameDetails.rating,
+                    iconSize: IconSize.xsmall,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
         TableRow(
           children: [
-            _leftSideText('Publishers:'),
+            _leftSideText('${Labels.publishers}:'),
             _rightSideText(gameDetails.publishers.join(', ')),
           ],
         ),
         TableRow(
           children: [
-            _leftSideText('Genres:'),
+            _leftSideText('${Labels.genres}:'),
             _rightSideText(gameDetails.genres.join(', ')),
           ],
         ),
         TableRow(
           children: [
-            _leftSideText('Stores:'),
+            _leftSideText('${Labels.stores}:'),
             gameDetails.stores != null
                 ? _rightSideText(gameDetails.stores!.join(', '))
                 : _rightSideText(Labels.notApplicable),
@@ -132,13 +148,13 @@ class GameInfoTable extends StatelessWidget {
         ),
         TableRow(
           children: [
-            _leftSideText('Tags:'),
+            _leftSideText('${Labels.tags}:'),
             _rightSideText(gameDetails.tags.join(', ')),
           ],
         ),
         TableRow(
           children: [
-            _leftSideText('ESRB Rating:'),
+            _leftSideText('${Labels.esrbRating}:'),
             gameDetails.esrbRating?.isNotEmpty == true
                 ? _rightSideText(gameDetails.esrbRating!)
                 : _rightSideText(Labels.notApplicable),

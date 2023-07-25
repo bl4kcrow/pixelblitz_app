@@ -24,7 +24,7 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
   @override
   void initState() {
     super.initState();
-    selectedTopList = <GameTopLists>{GameTopLists.popular};
+    selectedTopList = <GameTopLists>{GameTopLists.recentReleases};
     WidgetsBinding.instance.addPostFrameCallback((_) => _recordSize());
   }
 
@@ -135,23 +135,23 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
           ),
         ),
         segments: <ButtonSegment<GameTopLists>>[
-          const ButtonSegment<GameTopLists>(
-            value: GameTopLists.recentReleases,
-            label: Text(
-              Labels.recent,
-            ),
-          ),
-          ButtonSegment<GameTopLists>(
-            value: GameTopLists.popular,
-            label: Text(
-              Labels.popular,
-              key: myTextKey,
-            ),
-          ),
           ButtonSegment<GameTopLists>(
             value: GameTopLists.best,
             label: Text(
               '${Labels.best} $previousYear',
+            ),
+          ),
+          ButtonSegment<GameTopLists>(
+            value: GameTopLists.recentReleases,
+            label: Text(
+              Labels.recent,
+              key: myTextKey,
+            ),
+          ),
+          const ButtonSegment<GameTopLists>(
+            value: GameTopLists.popular,
+            label: Text(
+              Labels.popular,
             ),
           ),
         ],

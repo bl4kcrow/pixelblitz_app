@@ -44,19 +44,19 @@ class App extends StatelessWidget {
                 NewAndTrendingBloc(context.read<GamesRepositoryImpl>())
                   ..add(GetNewAndTrending()),
           ),
-          BlocProvider(
-            create: (context) =>
-                TopListsBloc(context.read<GamesRepositoryImpl>())
-                  ..add(
-                    GetInitial(
-                      from: DateTime.now().copyWith(
-                        month: 01,
-                        day: 01,
-                      ),
-                      to: DateTime.now(),
-                    ),
+          BlocProvider(create: (context) {
+            final DateTime dateTimeNow = DateTime.now();
+            return TopListsBloc(context.read<GamesRepositoryImpl>())
+              ..add(
+                GetInitial(
+                  from: DateTime(
+                    dateTimeNow.year,
+                    dateTimeNow.month - 1,
                   ),
-          ),
+                  to: dateTimeNow,
+                ),
+              );
+          }),
           BlocProvider(
             create: (context) =>
                 GameDetailsBloc(context.read<GamesRepositoryImpl>()),

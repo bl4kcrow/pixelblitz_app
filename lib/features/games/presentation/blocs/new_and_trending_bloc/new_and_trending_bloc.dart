@@ -31,6 +31,7 @@ class NewAndTrendingBloc
       games = response.results as List<Game>;
 
       if (games.isNotEmpty) {
+        games.shuffle();
         emit(
           state.copyWith(
             games: games,
