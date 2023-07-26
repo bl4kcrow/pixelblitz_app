@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../core/theme/theme.dart';
@@ -118,6 +119,7 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
       margin: const EdgeInsets.symmetric(horizontal: Insets.medium),
       child: BlocBuilder<TopListsBloc, TopListsState>(
         builder: (context, state) {
+          FlutterNativeSplash.remove();
           if (state.requestStatus == GamesRequestStatus.success) {
             return GridCards(
               games: state.games,
