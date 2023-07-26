@@ -115,12 +115,16 @@ class _HorizontalPlatformsListState extends State<HorizontalPlatformsList> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               if (platformAssetPath != null) ...[
-                                SvgIcon(
-                                  path: platformAssetPath.path,
-                                  color: isSelected
-                                      ? AppColors.white
-                                      : AppColors.white.withOpacity(0.7),
-                                  iconSize: IconSize.small * 2,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: Insets.small),
+                                  child: SvgIcon(
+                                    path: platformAssetPath.path,
+                                    color: isSelected
+                                        ? AppColors.white
+                                        : AppColors.white.withOpacity(0.7),
+                                    iconSize: IconSize.small * 2,
+                                  ),
                                 ),
                                 Text(
                                   platform.name,

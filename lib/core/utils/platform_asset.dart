@@ -20,7 +20,7 @@ enum PlatformAsset {
   playstation(Labels.playstation, Assets.playstationIcon),
   psvita(Labels.psVita, Assets.psVitaIcon),
   sega(Labels.sega, Assets.segaIcon),
-  snes(Labels.snes, Assets.nintendoIcon),
+  snes(Labels.snes, Assets.snesIcon),
   wiiu(Labels.wiiU, Assets.wiiUIcon),
   wii(Labels.wii, Assets.wiiIcon),
   windows(Labels.windows, Assets.windowsIcon),

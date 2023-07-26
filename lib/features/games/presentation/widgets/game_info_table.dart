@@ -148,6 +148,12 @@ class GameInfoTable extends StatelessWidget {
         ),
         TableRow(
           children: [
+            _leftSideText('${Labels.platforms}:'),
+            _rightSideText(gameDetails.platforms.join(', '))
+          ],
+        ),
+        TableRow(
+          children: [
             _leftSideText('${Labels.tags}:'),
             _rightSideText(gameDetails.tags.join(', ')),
           ],

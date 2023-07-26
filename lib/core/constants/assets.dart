@@ -16,6 +16,7 @@ class Assets {
   static const ps5Icon = 'assets/images/icons/icon-ps5.svg';
   static const psVitaIcon = 'assets/images/icons/icon-ps-vita.svg';
   static const segaIcon = 'assets/images/icons/icon-sega.svg';
+  static const snesIcon = 'assets/images/icons/icon-snes.svg';
   static const spaceInvaderLottie = 'assets/images/lotties/space-invader.json';
   static const switchIcon = 'assets/images/icons/icon-switch.svg';
   static const wiiUIcon = 'assets/images/icons/icon-wii-u.svg';
