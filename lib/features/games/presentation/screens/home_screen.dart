@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           _TopSwiper(),
           const SizedBox(height: Insets.medium),
-          const SegmentedListsButton(),
+          const _CenterSegmentedButton(),
           const SizedBox(height: Insets.medium),
           Expanded(child: _BottomGridCards()),
         ],
@@ -29,6 +29,34 @@ class HomeScreen extends StatelessWidget {
 class _BottomGridCards extends StatefulWidget {
   @override
   State<_BottomGridCards> createState() => _BottomGridCardsState();
+}
+
+class _CenterSegmentedButton extends StatelessWidget {
+  const _CenterSegmentedButton();
+
+  Widget _emptyBody() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
+      child: Container(
+        height: 40.0,
+        width: double.maxFinite,
+        decoration: const BoxDecoration(color: AppColors.eerieBlack),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TopListsBloc, TopListsState>(
+      builder: (context, state) {
+        if (state.requestStatus == GamesRequestStatus.success) {
+          return const SegmentedListsButton();
+        } else {
+          return _emptyBody();
+        }
+      },
+    );
+  }
 }
 
 class _BottomGridCardsState extends State<_BottomGridCards> {
