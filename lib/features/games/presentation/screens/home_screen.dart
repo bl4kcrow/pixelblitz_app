@@ -55,6 +55,8 @@ class _CenterSegmentedButton extends StatelessWidget {
           return _emptyBody();
         }
       },
+      buildWhen: (_, current) =>
+          current.requestStatus == GamesRequestStatus.success,
     );
   }
 }
