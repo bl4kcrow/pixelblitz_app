@@ -197,7 +197,7 @@ class CardSwiper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Swiper(
-      // autoplay: true,
+      autoplay: true,
       autoplayDelay: 4000,
       itemCount: games.length,
       pagination: _swiperPagination,

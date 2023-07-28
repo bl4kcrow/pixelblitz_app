@@ -53,12 +53,12 @@ class GridCards extends StatelessWidget {
               extra: heroId,
             );
           },
-          child: Hero(
-            tag: heroId,
-            child: Stack(
-              alignment: Alignment.bottomLeft,
-              children: [
-                SizedBox.expand(
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+              SizedBox.expand(
+                child: Hero(
+                  tag: heroId,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.0),
@@ -80,72 +80,72 @@ class GridCards extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox.expand(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          AppColors.black,
-                        ],
-                        stops: [
-                          0.5,
-                          1.0,
-                        ],
-                      ),
+              ),
+              SizedBox.expand(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        AppColors.black,
+                      ],
+                      stops: [
+                        0.5,
+                        1.0,
+                      ],
                     ),
                   ),
                 ),
-                SizedBox.expand(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      gradient: const LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.centerLeft,
-                        colors: [
-                          AppColors.black,
-                          Colors.transparent,
-                        ],
-                        stops: [
-                          0.1,
-                          0.4,
-                        ],
-                      ),
+              ),
+              SizedBox.expand(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.centerLeft,
+                      colors: [
+                        AppColors.black,
+                        Colors.transparent,
+                      ],
+                      stops: [
+                        0.1,
+                        0.4,
+                      ],
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(Insets.small),
-                  child: Text(
-                    game.name,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(Insets.small),
+                child: Text(
+                  game.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Positioned(
-                  right: Insets.small,
-                  top: Insets.xsmall,
-                  child: Row(
-                    children: [
-                      const FaIcon(
-                        FontAwesomeIcons.solidStar,
-                        color: AppColors.sunglow,
-                        size: IconSize.large / 2,
-                      ),
-                      const SizedBox(width: Insets.xsmall),
-                      Text(
-                        game.rating.toString(),
-                        style: textTheme.bodyMedium,
-                      ),
-                    ],
-                  ),
+              ),
+              Positioned(
+                right: Insets.small,
+                top: Insets.xsmall,
+                child: Row(
+                  children: [
+                    const FaIcon(
+                      FontAwesomeIcons.solidStar,
+                      color: AppColors.sunglow,
+                      size: IconSize.large / 2,
+                    ),
+                    const SizedBox(width: Insets.xsmall),
+                    Text(
+                      game.rating.toString(),
+                      style: textTheme.bodyMedium,
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

@@ -31,8 +31,9 @@ class GamesList extends StatelessWidget {
       padding: EdgeInsets.zero,
       itemCount: games.length,
       itemBuilder: (context, index) {
-        final game = games[index];
-        final String heroId = 'games-list-${game.id}';
+        final Game game = games[index];
+        final GoRouterState state = GoRouterState.of(context);
+        final String heroId = '${state.location}-games-list-${game.id}';
 
         return GestureDetector(
           onTap: () {

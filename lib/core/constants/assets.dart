@@ -2,6 +2,7 @@ class Assets {
   const Assets._();
 
   static const androidIcon = 'assets/images/icons/icon-android.svg';
+  static const appLogo = 'assets/images/logos/logo-transparent-background.png';
   static const atariIcon = 'assets/images/icons/icon-atari.svg';
   static const gameBoyIcon = 'assets/images/icons/icon-game-boy.svg';
   static const gamecubeIcon = 'assets/images/icons/icon-gamecube.svg';

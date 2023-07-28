@@ -191,25 +191,42 @@ class _TopSwiper extends StatelessWidget {
                     Positioned(
                       right: Insets.medium,
                       top: screenSize.height * 0.07,
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.white.withOpacity(0.8),
-                        radius: 20,
-                        child: IconButton(
-                          onPressed: () {
-                            showSearch(
-                              query: context
-                                  .read<SearchGamesBloc>()
-                                  .currentSearchQuery,
-                              context: context,
-                              delegate: GamesSearchDelegate(),
-                            );
-                          },
-                          icon: const FaIcon(
-                            FontAwesomeIcons.magnifyingGlass,
-                            color: AppColors.black,
-                            size: IconSize.medium,
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: AppColors.white.withOpacity(0.8),
+                            radius: 20,
+                            child: IconButton(
+                              onPressed: () {
+                                showSearch(
+                                  query: context
+                                      .read<SearchGamesBloc>()
+                                      .currentSearchQuery,
+                                  context: context,
+                                  delegate: GamesSearchDelegate(),
+                                );
+                              },
+                              icon: const FaIcon(
+                                FontAwesomeIcons.magnifyingGlass,
+                                color: AppColors.black,
+                                size: IconSize.medium,
+                              ),
+                            ),
                           ),
-                        ),
+                          IconButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (_) => const InfoALertDialog(),
+                              );
+                            },
+                            icon: FaIcon(
+                              FontAwesomeIcons.circleInfo,
+                              color: AppColors.white.withOpacity(0.8),
+                              size: IconSize.large,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
