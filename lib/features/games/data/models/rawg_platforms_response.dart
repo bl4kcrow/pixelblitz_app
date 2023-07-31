@@ -11,7 +11,7 @@ class RawgPlatformsResponse extends ApiResponse<List<Platform>> {
 
   factory RawgPlatformsResponse.fromJson(Map<String, dynamic> json) =>
       RawgPlatformsResponse(
-        count: json['count'],
+        count: json['count'] ?? 0,
         next: json['next'],
         previous: json['previous'],
         results: List<Platform>.from(

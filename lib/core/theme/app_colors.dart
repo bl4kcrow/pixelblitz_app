@@ -10,8 +10,6 @@ class AppColors {
   static const Color melon = Color(0xFFFFB4AB);
   static const Color bloodRed = Color(0xFF690005);
   static const Color charlestonGrey = Color(0xFF2B2926);
-  // static const Color charlestonGrey = Color(0xFF191a1d);
-  // static const Color eerieBlack = Color(0xFF1E1E1E);
   static const Color eerieBlack = Color(0xFF121214);
   static const Color black = Colors.black87;
   static const Color green = Color(0xFF66cc33);

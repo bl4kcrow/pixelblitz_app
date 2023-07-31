@@ -7,18 +7,14 @@ class GameDetailsMapper {
         id: rawgGame.id,
         slug: rawgGame.slug,
         name: rawgGame.name,
-        description: rawgGame.description,
         descriptionRaw: rawgGame.descriptionRaw,
         metacritic: rawgGame.metacritic,
         metacriticUrl: rawgGame.metacriticUrl,
         released: rawgGame.released,
         tba: rawgGame.tba,
         backgroundImage: rawgGame.backgroundImage,
-        backgroundImageAdditional: rawgGame.backgroundImageAdditional,
         website: rawgGame.website,
         rating: rawgGame.rating,
-        saturatedColor: rawgGame.saturatedColor,
-        dominantColor: rawgGame.dominantColor,
         platforms: rawgGame.platforms
             .map(
               (rawgPlatform) => Platform(

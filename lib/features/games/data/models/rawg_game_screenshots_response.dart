@@ -15,7 +15,7 @@ class RawgGameScreenshotsResponse {
 
   factory RawgGameScreenshotsResponse.fromJson(Map<String, dynamic> json) =>
       RawgGameScreenshotsResponse(
-        count: json['count'],
+        count: json['count'] ?? 0,
         next: json['next'],
         previous: json['previous'],
         results: List<RawgGameScreenshotModel>.from(

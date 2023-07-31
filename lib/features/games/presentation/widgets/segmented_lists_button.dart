@@ -121,7 +121,7 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
           ),
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(AppRadius.small),
             ),
           ),
           textStyle: MaterialStateTextStyle.resolveWith(

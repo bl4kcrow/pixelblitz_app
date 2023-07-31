@@ -11,7 +11,7 @@ class RawgGenresResponse extends ApiResponse<List<Genre>> {
 
   factory RawgGenresResponse.fromJson(Map<String, dynamic> json) =>
       RawgGenresResponse(
-        count: json['count'],
+        count: json['count'] ?? 0,
         next: json['next'],
         previous: json['previous'],
         results: List<Genre>.from(

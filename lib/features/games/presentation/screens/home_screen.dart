@@ -39,7 +39,7 @@ class _CenterSegmentedButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
       child: Container(
-        height: 40.0,
+        height: 40,
         width: double.maxFinite,
         decoration: const BoxDecoration(color: AppColors.eerieBlack),
       ),
@@ -98,7 +98,7 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
         for (int item = 1; item <= 8; item++) ...[
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(AppRadius.small),
               color: AppColors.eerieBlack,
             ),
           ),

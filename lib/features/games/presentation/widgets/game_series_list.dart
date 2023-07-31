@@ -94,7 +94,8 @@ class _GameSeriesListState extends State<GameSeriesList> {
                             child: AspectRatio(
                               aspectRatio: 3 / 4,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0),
+                                borderRadius:
+                                    BorderRadius.circular(AppRadius.small),
                                 child: CachedNetworkImage(
                                   imageUrl: currentGame.backgroundImage,
                                   fit: BoxFit.cover,

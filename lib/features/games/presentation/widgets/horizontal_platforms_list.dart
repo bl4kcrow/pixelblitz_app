@@ -101,7 +101,7 @@ class _HorizontalPlatformsListState extends State<HorizontalPlatformsList> {
                             ? AppColors.black
                             : AppColors.charlestonGrey,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(AppRadius.small),
                           side: BorderSide(
                             color: isSelected
                                 ? AppColors.maroon
@@ -129,7 +129,7 @@ class _HorizontalPlatformsListState extends State<HorizontalPlatformsList> {
                                 Text(
                                   platform.name,
                                   textAlign: TextAlign.center,
-                                  maxLines: 2,
+                                  maxLines: AppConstants.commonMaxLines,
                                   softWrap: true,
                                   style: textTheme.bodySmall,
                                 ),
@@ -137,7 +137,7 @@ class _HorizontalPlatformsListState extends State<HorizontalPlatformsList> {
                                 Text(
                                   platform.name,
                                   textAlign: TextAlign.center,
-                                  maxLines: 2,
+                                  maxLines: AppConstants.commonMaxLines,
                                   softWrap: true,
                                   style: textTheme.bodyLarge,
                                 ),

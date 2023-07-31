@@ -62,14 +62,14 @@ class GamesList extends StatelessWidget {
                   width: screenSize.width * 0.4,
                   height: screenSize.width * 0.25,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
+                    borderRadius: BorderRadius.circular(AppRadius.xsmall),
                   ),
                   child: Hero(
                     tag: heroId,
                     child: AspectRatio(
                       aspectRatio: 16 / 9,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5.0),
+                        borderRadius: BorderRadius.circular(AppRadius.xsmall),
                         child: CachedNetworkImage(
                           imageUrl: game.backgroundImage,
                           colorBlendMode: BlendMode.darken,

@@ -27,7 +27,7 @@ class HorizontalGameScreenshotsView extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(AppRadius.small),
                     boxShadow: const [
                       BoxShadow(
                         color: AppColors.congoPink,
@@ -40,7 +40,7 @@ class HorizontalGameScreenshotsView extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(AppRadius.small),
                       child: CachedNetworkImage(
                         imageUrl: state.gameScreenshots[index].image,
                         fit: BoxFit.cover,

@@ -26,8 +26,8 @@ class RawgTagModel {
       RawgTagModel.fromMap(json.decode(str));
 
   factory RawgTagModel.fromMap(Map<String, dynamic> json) => RawgTagModel(
-        id: json["id"],
-        name: json["name"],
-        slug: json["slug"],
+        id: json['id'],
+        name: json['name'],
+        slug: json['slug'],
       );
 }

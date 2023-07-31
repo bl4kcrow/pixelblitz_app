@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-
+import '../../../../core/constants/constants.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/theme/theme.dart';
 import '../../domain/domain.dart';
@@ -72,8 +72,8 @@ class CardSwiper extends StatelessWidget {
         final itemSize =
             (screenSize.width - (Insets.medium * 2)) / (config.itemCount + 1);
 
-        for (var i = 0; i < config.itemCount; i++) {
-          if (i == config.activeIndex) {
+        for (var item = 0; item < config.itemCount; item++) {
+          if (item == config.activeIndex) {
             list.add(
               _ActiveSwiperLine(itemSize * 2),
             );
@@ -125,7 +125,7 @@ class CardSwiper extends StatelessWidget {
             children: [
               SizedBox.expand(
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 2.0),
+                  padding: const EdgeInsets.only(bottom: Insets.xsmall / 2),
                   child: CachedNetworkImage(
                     imageUrl: currentGame.backgroundImage,
                     fit: BoxFit.cover,
@@ -167,7 +167,7 @@ class CardSwiper extends StatelessWidget {
                           currentGame.name,
                           style: textTheme.headlineLarge,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: AppConstants.commonMaxLines,
                         ),
                         const SizedBox(height: Insets.medium),
                         PlatformsIconRow(
@@ -180,7 +180,7 @@ class CardSwiper extends StatelessWidget {
                           style: textTheme.bodyMedium?.copyWith(
                             color: AppColors.white.withOpacity(0.4),
                           ),
-                          maxLines: 2,
+                          maxLines: AppConstants.commonMaxLines,
                         ),
                       ],
                     ),

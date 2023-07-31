@@ -61,7 +61,7 @@ class GridCards extends StatelessWidget {
                   tag: heroId,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(AppRadius.xsmall),
                       boxShadow: const [
                         BoxShadow(
                           color: AppColors.charlestonGrey,
@@ -72,7 +72,7 @@ class GridCards extends StatelessWidget {
                       ],
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(AppRadius.xsmall),
                       child: CachedNetworkImage(
                         imageUrl: game.backgroundImage,
                         fit: BoxFit.cover,
@@ -84,7 +84,7 @@ class GridCards extends StatelessWidget {
               SizedBox.expand(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
+                    borderRadius: BorderRadius.circular(AppRadius.xsmall),
                     gradient: const LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -103,7 +103,7 @@ class GridCards extends StatelessWidget {
               SizedBox.expand(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
+                    borderRadius: BorderRadius.circular(AppRadius.xsmall),
                     gradient: const LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.centerLeft,

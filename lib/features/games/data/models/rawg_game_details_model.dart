@@ -7,18 +7,14 @@ class RawgGameDetailsModel {
   final int id;
   final String slug;
   final String name;
-  final String description;
   final String descriptionRaw;
   final int? metacritic;
   final String? metacriticUrl;
   final DateTime? released;
   final bool tba;
   final String backgroundImage;
-  final String? backgroundImageAdditional;
   final String? website;
   final double rating;
-  final String saturatedColor;
-  final String dominantColor;
   final List<RawgPlatformModel> platforms;
   final List<RawgDeveloperModel> developers;
   final List<RawgPublisherModel> publishers;
@@ -31,18 +27,14 @@ class RawgGameDetailsModel {
     required this.id,
     required this.slug,
     required this.name,
-    required this.description,
     required this.descriptionRaw,
     this.metacritic,
     this.metacriticUrl,
     this.released,
     required this.tba,
     required this.backgroundImage,
-    this.backgroundImageAdditional,
     this.website,
     required this.rating,
-    required this.saturatedColor,
-    required this.dominantColor,
     required this.platforms,
     required this.developers,
     required this.publishers,
@@ -80,19 +72,14 @@ class RawgGameDetailsModel {
         id: id ?? this.id,
         slug: slug ?? this.slug,
         name: name ?? this.name,
-        description: description ?? this.description,
         descriptionRaw: descriptionRaw ?? this.descriptionRaw,
         metacritic: metacritic ?? this.metacritic,
         metacriticUrl: metacriticUrl ?? this.metacriticUrl,
         released: released ?? this.released,
         tba: tba ?? this.tba,
         backgroundImage: backgroundImage ?? this.backgroundImage,
-        backgroundImageAdditional:
-            backgroundImageAdditional ?? this.backgroundImageAdditional,
         website: website ?? this.website,
         rating: rating ?? this.rating,
-        saturatedColor: saturatedColor ?? this.saturatedColor,
-        dominantColor: dominantColor ?? this.dominantColor,
         platforms: platforms ?? this.platforms,
         developers: developers ?? this.developers,
         publishers: publishers ?? this.publishers,
@@ -110,7 +97,6 @@ class RawgGameDetailsModel {
       id: json['id'],
       slug: json['slug'],
       name: json['name'],
-      description: json['description'],
       descriptionRaw: json['description_raw'],
       metacritic: json['metacritic'],
       metacriticUrl: json['metacritic_url'],
@@ -118,11 +104,8 @@ class RawgGameDetailsModel {
           json['released'] != null ? DateTime.tryParse(json['released']) : null,
       tba: json['tba'],
       backgroundImage: json['background_image'] ?? AppConstants.noImageUrl,
-      backgroundImageAdditional: json['background_image_additional'],
       website: json['website'],
       rating: json['rating']?.toDouble(),
-      saturatedColor: json['saturated_color'],
-      dominantColor: json['dominant_color'],
       platforms: List<RawgPlatformModel>.from(
         json['platforms']
             .map(

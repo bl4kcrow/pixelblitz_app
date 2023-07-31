@@ -208,8 +208,6 @@ class _GameCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: gameDetails.backgroundImage,
                 fit: BoxFit.cover,
-                memCacheHeight: 2160,
-                memCacheWidth: 3840,
               ),
             ),
             const SizedBox.expand(
@@ -245,7 +243,7 @@ class _GameCard extends StatelessWidget {
                       gameDetails.name,
                       style: textTheme.headlineLarge,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
+                      maxLines: AppConstants.commonMaxLines,
                     ),
                     const SizedBox(height: Insets.medium),
                     PlatformsIconRow(
@@ -259,7 +257,7 @@ class _GameCard extends StatelessWidget {
                         style: textTheme.bodyLarge?.copyWith(
                           color: AppColors.white.withOpacity(0.6),
                         ),
-                        maxLines: 2,
+                        maxLines: AppConstants.commonMaxLines,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: Insets.small),
@@ -268,7 +266,7 @@ class _GameCard extends StatelessWidget {
                         style: textTheme.bodyMedium?.copyWith(
                           color: AppColors.white.withOpacity(0.4),
                         ),
-                        maxLines: 2,
+                        maxLines: AppConstants.commonMaxLines,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: Insets.small),

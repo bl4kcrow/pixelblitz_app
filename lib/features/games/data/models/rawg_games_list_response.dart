@@ -11,7 +11,7 @@ class RawgGamesListResponse extends ApiResponse<List<Game>> {
 
   factory RawgGamesListResponse.fromJson(Map<String, dynamic> json) =>
       RawgGamesListResponse(
-        count: json['count'],
+        count: json['count'] ?? 0,
         next: json['next'],
         previous: json['previous'],
         results: List<Game>.from(

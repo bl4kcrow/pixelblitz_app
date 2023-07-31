@@ -28,7 +28,7 @@ class SelectableButton extends StatelessWidget {
               : AppColors.eerieBlack,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(AppRadius.small),
         ),
       ),
       onPressed: onPressed,
