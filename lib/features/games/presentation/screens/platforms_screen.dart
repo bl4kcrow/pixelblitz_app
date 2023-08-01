@@ -60,7 +60,7 @@ class _PlatformsScreenState extends State<PlatformsScreen> {
                     );
                   } else {
                     return const Center(
-                      child: CircularProgressIndicator.adaptive(),
+                      child: SpinnerIndicator(),
                     );
                   }
                 },

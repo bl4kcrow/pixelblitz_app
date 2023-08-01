@@ -65,7 +65,7 @@ class _GenresScreenState extends State<GenresScreen> {
                     );
                   } else {
                     return const Center(
-                      child: CircularProgressIndicator.adaptive(),
+                      child: SpinnerIndicator(),
                     );
                   }
                 },

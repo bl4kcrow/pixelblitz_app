@@ -176,7 +176,7 @@ class _HorizontalPlatformsListState extends State<HorizontalPlatformsList> {
             ],
           );
         } else {
-          return const SizedBox.shrink();
+          return SizedBox(height: screenSize.width * 0.3);
         }
       },
     );

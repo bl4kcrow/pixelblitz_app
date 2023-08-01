@@ -109,9 +109,7 @@ class _HorizontalGenresGridListState extends State<HorizontalGenresGridList> {
             ],
           );
         } else {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
+          return const SizedBox.shrink();
         }
       },
     );

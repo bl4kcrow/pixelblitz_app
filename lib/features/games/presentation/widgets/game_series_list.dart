@@ -178,7 +178,7 @@ class _GameSeriesListState extends State<GameSeriesList> {
             }
           } else {
             return const Center(
-              child: CircularProgressIndicator.adaptive(),
+              child: SpinnerIndicator(),
             );
           }
         },

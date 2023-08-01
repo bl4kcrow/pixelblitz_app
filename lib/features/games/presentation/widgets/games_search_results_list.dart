@@ -115,7 +115,7 @@ class _GameSearchResultListState extends State<GamesSearchResultList> {
           }
         } else {
           return const Center(
-            child: CircularProgressIndicator.adaptive(),
+            child: SpinnerIndicator(),
           );
         }
       },

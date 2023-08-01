@@ -29,5 +29,6 @@ export 'widgets/no_data_animation.dart';
 export 'widgets/platforms_icon_row.dart';
 export 'widgets/segmented_lists_button.dart';
 export 'widgets/selectable_button.dart';
+export 'widgets/spinner_indicator.dart';
 export 'widgets/star_rating.dart';
 export 'widgets/svg_icon.dart';

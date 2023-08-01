@@ -54,7 +54,7 @@ class GameDetailsScreen extends StatelessWidget {
             );
           } else {
             return const Center(
-              child: CircularProgressIndicator.adaptive(),
+              child: SpinnerIndicator(),
             );
           }
         },
