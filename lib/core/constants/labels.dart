@@ -48,6 +48,7 @@ class Labels {
   static const rating = 'Rating';
   static const recent = 'RECENT';
   static const releaseDate = 'Release Date';
+  static const searchAGameMyFriend = 'Search a game my friend';
   static const searchGames = 'Search games';
   static const sega = 'sega';
   static const snapshots = 'SNAPSHOTS';

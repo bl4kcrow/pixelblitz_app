@@ -20,6 +20,7 @@ export 'widgets/card_swiper.dart';
 export 'widgets/game_info_table.dart';
 export 'widgets/game_series_list.dart';
 export 'widgets/games_list.dart';
+export 'widgets/games_search_results_list.dart';
 export 'widgets/grid_cards.dart';
 export 'widgets/horizontal_game_screenshots_view.dart';
 export 'widgets/horizontal_genres_grid_list.dart';

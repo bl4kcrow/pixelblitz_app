@@ -139,7 +139,7 @@ class GridCards extends StatelessWidget {
                     ),
                     const SizedBox(width: Insets.xsmall),
                     Text(
-                      game.rating.toString(),
+                      game.rating.toStringAsFixed(1),
                       style: textTheme.bodyMedium,
                     ),
                   ],

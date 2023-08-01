@@ -109,9 +109,8 @@ class GameInfoTable extends StatelessWidget {
           children: [
             _leftSideText('${Labels.rating}:'),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _rightSideText(gameDetails.rating.toString()),
+                _rightSideText(gameDetails.rating.toStringAsFixed(1)),
                 Padding(
                   padding: const EdgeInsets.only(
                     bottom: Insets.xsmall,

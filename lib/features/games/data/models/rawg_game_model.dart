@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 import '../../../../core/constants/constants.dart';
 import '../data.dart';
 
@@ -51,7 +49,6 @@ class RawgGameModel {
       RawgGameModel.fromMap(json.decode(str));
 
   factory RawgGameModel.fromMap(Map<String, dynamic> json) {
-    debugPrint('GAME');
     return RawgGameModel(
       id: json['id'],
       name: json['name'],
