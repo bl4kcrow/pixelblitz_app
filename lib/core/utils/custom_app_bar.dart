@@ -28,6 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               query: context.read<SearchGamesBloc>().currentSearchQuery,
               context: context,
               delegate: GamesSearchDelegate(),
+              useRootNavigator: true,
             );
           },
           icon: const FaIcon(

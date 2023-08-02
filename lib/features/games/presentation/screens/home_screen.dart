@@ -204,6 +204,7 @@ class _TopSwiper extends StatelessWidget {
                                       .currentSearchQuery,
                                   context: context,
                                   delegate: GamesSearchDelegate(),
+                                  useRootNavigator: true,
                                 );
                               },
                               icon: const FaIcon(
