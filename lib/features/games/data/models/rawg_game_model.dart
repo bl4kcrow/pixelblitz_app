@@ -57,13 +57,32 @@ class RawgGameModel {
       backgroundImage: json['background_image'] ?? AppConstants.noImageUrl,
       rating: json['rating']?.toDouble(),
       metacritic: json['metacritic']?.toInt(),
-      platforms: List<RawgPlatformModel>.from(
-        json['platforms'].map(
-            (platforms) => RawgPlatformModel.fromMap(platforms['platform'])),
-      ),
-      genres: List<RawgGenreModel>.from(
-        json['genres'].map((genre) => RawgGenreModel.fromMap(genre)),
-      ),
+      platforms: json['platforms'] != null
+          ? List<RawgPlatformModel>.from(
+              json['platforms'].map(
+                (platforms) => RawgPlatformModel.fromMap(platforms['platform']),
+              ),
+            )
+          : [
+              RawgPlatformModel(
+                id: 0,
+                name: Labels.notApplicable,
+                slug: Labels.notApplicable,
+              )
+            ],
+      genres: json['genres'] != null
+          ? List<RawgGenreModel>.from(
+              json['genres'].map(
+                (genre) => RawgGenreModel.fromMap(genre),
+              ),
+            )
+          : [
+              RawgGenreModel(
+                id: 0,
+                name: Labels.notApplicable,
+                slug: Labels.notApplicable,
+              )
+            ],
     );
   }
 }
