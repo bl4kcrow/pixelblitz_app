@@ -27,6 +27,7 @@ class _InfoALertDialogState extends State<InfoALertDialog> {
       icon: Image.asset(
         Assets.appLogo,
         height: screenSize.width / 4,
+        semanticLabel: SemanticLabels.pixelblitzLogo,
       ),
       content: SizedBox(
         height: screenSize.width / 2,
@@ -59,6 +60,7 @@ class _InfoALertDialogState extends State<InfoALertDialog> {
                       const FaIcon(
                         FontAwesomeIcons.arrowUpRightFromSquare,
                         color: AppColors.melon,
+                        semanticLabel: SemanticLabels.goToRawgLink,
                         size: IconSize.xsmall / 1.5,
                       ),
                     ],

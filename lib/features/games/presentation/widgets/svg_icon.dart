@@ -9,11 +9,13 @@ class SvgIcon extends StatelessWidget {
     required this.path,
     this.color = AppColors.white,
     this.iconSize = IconSize.small,
+    this.semanticsLabel,
   });
 
   final String path;
   final Color color;
   final double iconSize;
+  final String? semanticsLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class SvgIcon extends StatelessWidget {
         BlendMode.srcIn,
       ),
       height: iconSize,
+      semanticsLabel: semanticsLabel,
       width: iconSize,
     );
   }

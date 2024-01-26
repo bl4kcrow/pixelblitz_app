@@ -58,6 +58,7 @@ class GameInfoTable extends StatelessWidget {
                 FontAwesomeIcons.arrowUpRightFromSquare,
                 color: AppColors.melon,
                 size: IconSize.xsmall / 1.5,
+                semanticLabel: SemanticLabels.goToGameLink,
               ),
             ],
           ),

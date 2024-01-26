@@ -99,7 +99,11 @@ class _GameViewsState extends State<_GameViews> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(widget.gameDetails.descriptionRaw),
+          Text(
+            widget.gameDetails.descriptionRaw,
+            semanticsLabel:
+                '${SemanticLabels.description} ${widget.gameDetails.descriptionRaw}',
+          ),
           const SizedBox(height: Insets.large),
           Text(
             Labels.snapshots,
@@ -144,7 +148,11 @@ class _GameViewsState extends State<_GameViews> {
             children: [
               for (int index = 0; index < _chips.length; index++) ...[
                 ChoiceChip(
-                  label: Text(_chips[index]),
+                  label: Text(
+                    _chips[index],
+                    semanticsLabel:
+                        '${_chips[index]} ${SemanticLabels.details} ${SemanticLabels.button}',
+                  ),
                   selected: _chipSelected == index,
                   onSelected: (_) {
                     setState(() {
@@ -198,120 +206,133 @@ class _GameCard extends StatelessWidget {
     final screenSize = MediaQuery.sizeOf(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return Hero(
-      tag: heroId,
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: Stack(
-          children: [
-            SizedBox.expand(
-              child: CachedNetworkImage(
-                imageUrl: gameDetails.backgroundImage,
-                fit: BoxFit.cover,
+    return Semantics(
+      label: SemanticLabels.gameHeaderDetails,
+      child: Hero(
+        tag: heroId,
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Stack(
+            children: [
+              SizedBox.expand(
+                child: CachedNetworkImage(
+                  imageUrl: gameDetails.backgroundImage,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            const SizedBox.expand(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      AppColors.eerieBlack,
-                    ],
-                    stops: [
-                      0.6,
-                      1.0,
+              const SizedBox.expand(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        AppColors.eerieBlack,
+                      ],
+                      stops: [
+                        0.6,
+                        1.0,
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Positioned.fill(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Insets.medium,
+                    vertical: Insets.medium,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        gameDetails.name,
+                        style: textTheme.headlineLarge,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: AppConstants.commonMaxLines,
+                      ),
+                      const SizedBox(height: Insets.medium),
+                      Semantics(
+                        label: SemanticLabels.platformIcons,
+                        child: PlatformsIconRow(
+                          color: AppColors.white.withOpacity(0.7),
+                          platforms: gameDetails.platforms,
+                        ),
+                      ),
+                      const SizedBox(height: Insets.medium),
+                      if (isCompacted == false) ...[
+                        Text(
+                          developers,
+                          style: textTheme.bodyLarge?.copyWith(
+                            color: AppColors.white.withOpacity(0.6),
+                          ),
+                          maxLines: AppConstants.commonMaxLines,
+                          overflow: TextOverflow.ellipsis,
+                          semanticsLabel:
+                              '${SemanticLabels.developers} $developers',
+                        ),
+                        const SizedBox(height: Insets.small),
+                        Text(
+                          genres,
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: AppColors.white.withOpacity(0.4),
+                          ),
+                          maxLines: AppConstants.commonMaxLines,
+                          overflow: TextOverflow.ellipsis,
+                          semanticsLabel: '${SemanticLabels.genres} $genres',
+                        ),
+                        const SizedBox(height: Insets.small),
+                      ] else
+                        const SizedBox.shrink(),
                     ],
                   ),
                 ),
               ),
-            ),
-            Positioned.fill(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.medium,
-                  vertical: Insets.medium,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      gameDetails.name,
-                      style: textTheme.headlineLarge,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: AppConstants.commonMaxLines,
-                    ),
-                    const SizedBox(height: Insets.medium),
-                    PlatformsIconRow(
-                      color: AppColors.white.withOpacity(0.7),
-                      platforms: gameDetails.platforms,
-                    ),
-                    const SizedBox(height: Insets.medium),
-                    if (isCompacted == false) ...[
-                      Text(
-                        developers,
-                        style: textTheme.bodyLarge?.copyWith(
-                          color: AppColors.white.withOpacity(0.6),
+              Positioned(
+                right: Insets.small,
+                top: screenSize.height * 0.07,
+                child: gameDetails.metacritic != null
+                    ? CircleAvatar(
+                        backgroundColor: MetacriticScore.getFromValue(
+                          gameDetails.metacritic!,
+                        ).color,
+                        radius: 22,
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.eerieBlack,
+                          radius: 20,
+                          child: Text(
+                            gameDetails.metacritic.toString(),
+                            style: textTheme.titleLarge?.copyWith(
+                              color: MetacriticScore.getFromValue(
+                                gameDetails.metacritic!,
+                              ).color,
+                            ),
+                            semanticsLabel:
+                                '${SemanticLabels.metracriticRate} gameDetails.metacritic.toString()',
+                          ),
                         ),
-                        maxLines: AppConstants.commonMaxLines,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: Insets.small),
-                      Text(
-                        genres,
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: AppColors.white.withOpacity(0.4),
-                        ),
-                        maxLines: AppConstants.commonMaxLines,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: Insets.small),
-                    ] else
-                      const SizedBox.shrink(),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              right: Insets.small,
-              top: screenSize.height * 0.07,
-              child: gameDetails.metacritic != null
-                  ? CircleAvatar(
-                      backgroundColor: MetacriticScore.getFromValue(
-                        gameDetails.metacritic!,
-                      ).color,
-                      radius: 22,
-                      child: CircleAvatar(
+                      )
+                    : CircleAvatar(
                         backgroundColor: AppColors.eerieBlack,
-                        radius: 20,
-                        child: Text(
-                          gameDetails.metacritic.toString(),
-                          style: textTheme.titleLarge?.copyWith(
-                            color: MetacriticScore.getFromValue(
-                              gameDetails.metacritic!,
-                            ).color,
+                        radius: 22,
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.maroon,
+                          radius: 20,
+                          child: Text(
+                            Labels.questionMark,
+                            style: textTheme.titleLarge,
+                            semanticsLabel:
+                                '${SemanticLabels.metracriticRate} ${Labels.notApplicable}',
                           ),
                         ),
                       ),
-                    )
-                  : CircleAvatar(
-                      backgroundColor: AppColors.eerieBlack,
-                      radius: 22,
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.maroon,
-                        radius: 20,
-                        child: Text(
-                          Labels.questionMark,
-                          style: textTheme.titleLarge,
-                        ),
-                      ),
-                    ),
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

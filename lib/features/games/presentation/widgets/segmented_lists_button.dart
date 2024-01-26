@@ -61,102 +61,105 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
-      child: SegmentedButton(
-        onSelectionChanged: (newSelectection) {
-          late final DateTime fromDate;
-          late final DateTime toDate;
+    return Semantics(
+      label: SemanticLabels.segmentedButton,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
+        child: SegmentedButton(
+          onSelectionChanged: (newSelectection) {
+            late final DateTime fromDate;
+            late final DateTime toDate;
 
-          final dateTimeNow = DateTime.now();
+            final dateTimeNow = DateTime.now();
 
-          setState(() {
-            selectedTopList = newSelectection;
-          });
+            setState(() {
+              selectedTopList = newSelectection;
+            });
 
-          if (selectedTopList.first == GameTopLists.best) {
-            fromDate = dateTimeNow.copyWith(
-              month: 01,
-              day: 01,
-              year: int.parse(previousYear),
-            );
-
-            toDate = dateTimeNow.copyWith(
-              month: 12,
-              day: 31,
-              year: int.parse(previousYear),
-            );
-          } else if (selectedTopList.first == GameTopLists.recentReleases) {
-            fromDate = DateTime(
-              dateTimeNow.year,
-              dateTimeNow.month - 1,
-            );
-            toDate = dateTimeNow;
-          } else {
-            fromDate = dateTimeNow.copyWith(
-              month: 01,
-              day: 01,
-            );
-            toDate = dateTimeNow;
-          }
-
-          context.read<TopListsBloc>().add(
-                GetInitial(
-                  from: fromDate,
-                  to: toDate,
-                  listType: selectedTopList.first,
-                ),
+            if (selectedTopList.first == GameTopLists.best) {
+              fromDate = dateTimeNow.copyWith(
+                month: 01,
+                day: 01,
+                year: int.parse(previousYear),
               );
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith(
-            (states) => states.contains(MaterialState.selected)
-                ? AppColors.black
-                : AppColors.eerieBlack,
-          ),
-          side: MaterialStatePropertyAll(
-            BorderSide(
-              color: AppColors.white.withOpacity(0.7),
+
+              toDate = dateTimeNow.copyWith(
+                month: 12,
+                day: 31,
+                year: int.parse(previousYear),
+              );
+            } else if (selectedTopList.first == GameTopLists.recentReleases) {
+              fromDate = DateTime(
+                dateTimeNow.year,
+                dateTimeNow.month - 1,
+              );
+              toDate = dateTimeNow;
+            } else {
+              fromDate = dateTimeNow.copyWith(
+                month: 01,
+                day: 01,
+              );
+              toDate = dateTimeNow;
+            }
+
+            context.read<TopListsBloc>().add(
+                  GetInitial(
+                    from: fromDate,
+                    to: toDate,
+                    listType: selectedTopList.first,
+                  ),
+                );
+          },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith(
+              (states) => states.contains(MaterialState.selected)
+                  ? AppColors.black
+                  : AppColors.eerieBlack,
+            ),
+            side: MaterialStatePropertyAll(
+              BorderSide(
+                color: AppColors.white.withOpacity(0.7),
+              ),
+            ),
+            shape: MaterialStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadius.small),
+              ),
+            ),
+            textStyle: MaterialStateTextStyle.resolveWith(
+              (states) => states.contains(MaterialState.selected)
+                  ? textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      foreground: Paint()
+                        ..shader = _getTextGradient(myTextRenderBox),
+                    )
+                  : textTheme.bodySmall!,
             ),
           ),
-          shape: MaterialStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppRadius.small),
+          segments: <ButtonSegment<GameTopLists>>[
+            ButtonSegment<GameTopLists>(
+              value: GameTopLists.best,
+              label: Text(
+                '${Labels.best} $previousYear',
+              ),
             ),
-          ),
-          textStyle: MaterialStateTextStyle.resolveWith(
-            (states) => states.contains(MaterialState.selected)
-                ? textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    foreground: Paint()
-                      ..shader = _getTextGradient(myTextRenderBox),
-                  )
-                : textTheme.bodySmall!,
-          ),
+            ButtonSegment<GameTopLists>(
+              value: GameTopLists.recentReleases,
+              label: Text(
+                Labels.recent,
+                key: myTextKey,
+              ),
+            ),
+            const ButtonSegment<GameTopLists>(
+              value: GameTopLists.popular,
+              label: Text(
+                Labels.popular,
+              ),
+            ),
+          ],
+          selected: selectedTopList,
+          showSelectedIcon: false,
         ),
-        segments: <ButtonSegment<GameTopLists>>[
-          ButtonSegment<GameTopLists>(
-            value: GameTopLists.best,
-            label: Text(
-              '${Labels.best} $previousYear',
-            ),
-          ),
-          ButtonSegment<GameTopLists>(
-            value: GameTopLists.recentReleases,
-            label: Text(
-              Labels.recent,
-              key: myTextKey,
-            ),
-          ),
-          const ButtonSegment<GameTopLists>(
-            value: GameTopLists.popular,
-            label: Text(
-              Labels.popular,
-            ),
-          ),
-        ],
-        selected: selectedTopList,
-        showSelectedIcon: false,
       ),
     );
   }

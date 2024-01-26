@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pixelblitz_app/core/constants/constants.dart';
 
 import '../../features/games/presentation/presentation.dart';
 import 'utils.dart';
@@ -33,6 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: const FaIcon(
             FontAwesomeIcons.magnifyingGlass,
+            semanticLabel: SemanticLabels.searchButton,
           ),
         ),
         IconButton(
@@ -44,6 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: const FaIcon(
             FontAwesomeIcons.circleInfo,
+            semanticLabel: SemanticLabels.appInfoButton,
           ),
         ),
       ],

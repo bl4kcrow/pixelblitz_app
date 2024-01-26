@@ -25,13 +25,14 @@ class PlatformsIconRow extends StatelessWidget {
   final List<Platform> platforms;
   final double separatorSize;
 
-  Widget _svgIcon(String assetName) {
+  Widget _svgIcon(String assetName, String assetPath) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: separatorSize),
       child: SvgIcon(
-        path: assetName,
+        path: assetPath,
         color: color,
         iconSize: iconSize,
+        semanticsLabel: assetName,
       ),
     );
   }
@@ -72,7 +73,10 @@ class PlatformsIconRow extends StatelessWidget {
             continue;
           }
 
-          platformsIcon.add(_svgIcon(platformIconPath.path));
+          platformsIcon.add(_svgIcon(
+            platformIconPath.name,
+            platformIconPath.path,
+          ));
           platformsNameIncluded.add(platformIconPath.name);
         } catch (_) {
           platformsIcon.add(

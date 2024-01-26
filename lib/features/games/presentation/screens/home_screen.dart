@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../core/utils/utils.dart';
 import '../presentation.dart';
@@ -30,36 +31,6 @@ class HomeScreen extends StatelessWidget {
 class _BottomGridCards extends StatefulWidget {
   @override
   State<_BottomGridCards> createState() => _BottomGridCardsState();
-}
-
-class _CenterSegmentedButton extends StatelessWidget {
-  const _CenterSegmentedButton();
-
-  Widget _emptyBody() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
-      child: Container(
-        height: 40,
-        width: double.maxFinite,
-        decoration: const BoxDecoration(color: AppColors.eerieBlack),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<TopListsBloc, TopListsState>(
-      builder: (context, state) {
-        if (state.requestStatus == GamesRequestStatus.success) {
-          return const SegmentedListsButton();
-        } else {
-          return _emptyBody();
-        }
-      },
-      buildWhen: (_, current) =>
-          current.requestStatus == GamesRequestStatus.success,
-    );
-  }
 }
 
 class _BottomGridCardsState extends State<_BottomGridCards> {
@@ -132,6 +103,36 @@ class _BottomGridCardsState extends State<_BottomGridCards> {
           }
         },
       ),
+    );
+  }
+}
+
+class _CenterSegmentedButton extends StatelessWidget {
+  const _CenterSegmentedButton();
+
+  Widget _emptyBody() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
+      child: Container(
+        height: 40,
+        width: double.maxFinite,
+        decoration: const BoxDecoration(color: AppColors.eerieBlack),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TopListsBloc, TopListsState>(
+      builder: (context, state) {
+        if (state.requestStatus == GamesRequestStatus.success) {
+          return const SegmentedListsButton();
+        } else {
+          return _emptyBody();
+        }
+      },
+      buildWhen: (_, current) =>
+          current.requestStatus == GamesRequestStatus.success,
     );
   }
 }
@@ -211,6 +212,7 @@ class _TopSwiper extends StatelessWidget {
                                 FontAwesomeIcons.magnifyingGlass,
                                 color: AppColors.black,
                                 size: IconSize.medium,
+                                semanticLabel: SemanticLabels.searchButton,
                               ),
                             ),
                           ),

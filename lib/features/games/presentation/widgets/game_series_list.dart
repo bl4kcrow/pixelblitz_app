@@ -68,6 +68,10 @@ class _GameSeriesListState extends State<GameSeriesList> {
                 itemBuilder: (BuildContext context, int index) {
                   final Game currentGame = state.games[index];
                   final String heroId = 'series-list-${currentGame.id}';
+                  final String formatedReleaseDate =
+                      currentGame.released != null
+                          ? DateFormat.yMMMd().format(currentGame.released!)
+                          : Labels.notApplicable;
 
                   return GestureDetector(
                     onTap: () {
@@ -89,16 +93,20 @@ class _GameSeriesListState extends State<GameSeriesList> {
                       height: screenSize.height * 0.2,
                       child: Row(
                         children: [
-                          Hero(
-                            tag: heroId,
-                            child: AspectRatio(
-                              aspectRatio: 3 / 4,
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(AppRadius.small),
-                                child: CachedNetworkImage(
-                                  imageUrl: currentGame.backgroundImage,
-                                  fit: BoxFit.cover,
+                          Semantics(
+                            label:
+                                '${index.toString()} ${SemanticLabels.clickcableImage} ${SemanticLabels.gameName} ${currentGame.name}',
+                            child: Hero(
+                              tag: heroId,
+                              child: AspectRatio(
+                                aspectRatio: 3 / 4,
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.circular(AppRadius.small),
+                                  child: CachedNetworkImage(
+                                    imageUrl: currentGame.backgroundImage,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -113,15 +121,18 @@ class _GameSeriesListState extends State<GameSeriesList> {
                                   currentGame.name,
                                   style: textTheme.bodyLarge,
                                   overflow: TextOverflow.ellipsis,
+                                  semanticsLabel:
+                                      '${SemanticLabels.gameName} ${currentGame.name}',
                                 ),
                                 const SizedBox(height: Insets.medium),
                                 if (currentGame.released != null) ...[
                                   Text(
-                                    DateFormat.yMMMd()
-                                        .format(currentGame.released!),
+                                    formatedReleaseDate,
                                     style: textTheme.bodyMedium?.copyWith(
                                       color: AppColors.melon,
                                     ),
+                                    semanticsLabel:
+                                        '${SemanticLabels.releaseDate} $formatedReleaseDate',
                                   ),
                                   const SizedBox(height: Insets.xsmall),
                                 ],
@@ -152,14 +163,19 @@ class _GameSeriesListState extends State<GameSeriesList> {
                                     style: textTheme.bodyMedium?.copyWith(
                                       color: AppColors.melon,
                                     ),
+                                    semanticsLabel:
+                                        '${SemanticLabels.metracriticRate} Labels.notApplicable',
                                   ),
                                 const SizedBox(height: Insets.xsmall),
-                                PlatformsIconRow(
-                                  color: AppColors.melon,
-                                  iconSize: IconSize.xsmall,
-                                  maxPlatforms: 8,
-                                  platforms: currentGame.platforms,
-                                  separatorSize: Insets.xsmall / 2,
+                                Semantics(
+                                  label: SemanticLabels.platformIcons,
+                                  child: PlatformsIconRow(
+                                    color: AppColors.melon,
+                                    iconSize: IconSize.xsmall,
+                                    maxPlatforms: 8,
+                                    platforms: currentGame.platforms,
+                                    separatorSize: Insets.xsmall / 2,
+                                  ),
                                 ),
                               ],
                             ),

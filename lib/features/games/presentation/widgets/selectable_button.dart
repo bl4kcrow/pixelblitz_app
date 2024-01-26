@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pixelblitz_app/core/constants/constants.dart';
 
 import '../../../../core/theme/theme.dart';
 
@@ -57,6 +58,7 @@ class SelectableButton extends StatelessWidget {
                 style: textTheme.labelMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
+                semanticsLabel: '$label ${SemanticLabels.optionSelected}',
               ),
             )
           : Text(
@@ -67,6 +69,7 @@ class SelectableButton extends StatelessWidget {
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,
               ),
+              semanticsLabel: '$label ${SemanticLabels.option}',
             ),
     );
   }

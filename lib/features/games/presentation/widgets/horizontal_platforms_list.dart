@@ -58,98 +58,107 @@ class _HorizontalPlatformsListState extends State<HorizontalPlatformsList> {
               SizedBox(
                 width: screenSize.width,
                 height: screenSize.width * 0.25,
-                child: ListView.separated(
-                  controller: scrollController,
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: state.platforms.length,
-                  itemBuilder: (context, index) {
-                    final Platform platform = state.platforms[index];
-                    final regExpMatch = regExp.firstMatch(platform.slug);
-                    final bool isSelected =
-                        platformsSelected.contains(platform.id);
+                child: Semantics(
+                  label: SemanticLabels.platformsHorizontalScroll,
+                  child: ListView.separated(
+                    controller: scrollController,
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.platforms.length,
+                    itemBuilder: (context, index) {
+                      final Platform platform = state.platforms[index];
+                      final regExpMatch = regExp.firstMatch(platform.slug);
+                      final bool isSelected =
+                          platformsSelected.contains(platform.id);
+                      final String platformSemanticLabel = isSelected
+                          ? '${platform.name} ${SemanticLabels.optionSelected}'
+                          : '${platform.name} ${SemanticLabels.option}';
 
-                    PlatformAsset? platformAssetPath;
+                      PlatformAsset? platformAssetPath;
 
-                    if (regExpMatch != null) {
-                      try {
-                        platformAssetPath = PlatformAsset.values.firstWhere(
-                          (platformAsset) =>
-                              platformAsset.name == regExpMatch[0],
-                        );
-                      } catch (_) {}
-                    }
+                      if (regExpMatch != null) {
+                        try {
+                          platformAssetPath = PlatformAsset.values.firstWhere(
+                            (platformAsset) =>
+                                platformAsset.name == regExpMatch[0],
+                          );
+                        } catch (_) {}
+                      }
 
-                    return GestureDetector(
-                      onTap: () {
-                        if (platformsSelected.contains(platform.id)) {
-                          platformsSelected.remove(platform.id);
-                        } else {
-                          platformsSelected.add(platform.id);
-                        }
+                      return GestureDetector(
+                        onTap: () {
+                          if (platformsSelected.contains(platform.id)) {
+                            platformsSelected.remove(platform.id);
+                          } else {
+                            platformsSelected.add(platform.id);
+                          }
 
-                        context
-                            .read<GamesByPlatformBloc>()
-                            .add(GetInitialGamesByPlatform(
-                              platformIds: platformsSelected,
-                            ));
+                          context
+                              .read<GamesByPlatformBloc>()
+                              .add(GetInitialGamesByPlatform(
+                                platformIds: platformsSelected,
+                              ));
 
-                        setState(() {});
-                      },
-                      child: Card(
-                        color: isSelected
-                            ? AppColors.black
-                            : AppColors.charlestonGrey,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppRadius.small),
-                          side: BorderSide(
-                            color: isSelected
-                                ? AppColors.maroon
-                                : AppColors.eerieBlack,
-                            width: 2,
+                          setState(() {});
+                        },
+                        child: Card(
+                          color: isSelected
+                              ? AppColors.black
+                              : AppColors.charlestonGrey,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(AppRadius.small),
+                            side: BorderSide(
+                              color: isSelected
+                                  ? AppColors.maroon
+                                  : AppColors.eerieBlack,
+                              width: 2,
+                            ),
                           ),
-                        ),
-                        child: SizedBox.square(
-                          dimension: screenSize.width * 0.25,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              if (platformAssetPath != null) ...[
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: Insets.small),
-                                  child: SvgIcon(
-                                    path: platformAssetPath.path,
-                                    color: isSelected
-                                        ? AppColors.white
-                                        : AppColors.white.withOpacity(0.7),
-                                    iconSize: IconSize.small * 2,
+                          child: SizedBox.square(
+                            dimension: screenSize.width * 0.25,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                if (platformAssetPath != null) ...[
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: Insets.small),
+                                    child: SvgIcon(
+                                      path: platformAssetPath.path,
+                                      color: isSelected
+                                          ? AppColors.white
+                                          : AppColors.white.withOpacity(0.7),
+                                      iconSize: IconSize.small * 2,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  platform.name,
-                                  textAlign: TextAlign.center,
-                                  maxLines: AppConstants.commonMaxLines,
-                                  softWrap: true,
-                                  style: textTheme.bodySmall,
-                                ),
-                              ] else
-                                Text(
-                                  platform.name,
-                                  textAlign: TextAlign.center,
-                                  maxLines: AppConstants.commonMaxLines,
-                                  softWrap: true,
-                                  style: textTheme.bodyLarge,
-                                ),
-                            ],
+                                  Text(
+                                    platform.name,
+                                    textAlign: TextAlign.center,
+                                    maxLines: AppConstants.commonMaxLines,
+                                    softWrap: true,
+                                    style: textTheme.bodySmall,
+                                    semanticsLabel: platformSemanticLabel,
+                                  ),
+                                ] else
+                                  Text(
+                                    platform.name,
+                                    textAlign: TextAlign.center,
+                                    maxLines: AppConstants.commonMaxLines,
+                                    softWrap: true,
+                                    style: textTheme.bodyLarge,
+                                    semanticsLabel: platformSemanticLabel,
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (_, __) {
-                    return const SizedBox(width: Insets.small);
-                  },
+                      );
+                    },
+                    separatorBuilder: (_, __) {
+                      return const SizedBox(width: Insets.small);
+                    },
+                  ),
                 ),
               ),
               GestureDetector(
@@ -170,6 +179,7 @@ class _HorizontalPlatformsListState extends State<HorizontalPlatformsList> {
                     style: textTheme.labelMedium?.copyWith(
                       color: AppColors.melon,
                     ),
+                    semanticsLabel: SemanticLabels.clearAllButton,
                   ),
                 ),
               ),

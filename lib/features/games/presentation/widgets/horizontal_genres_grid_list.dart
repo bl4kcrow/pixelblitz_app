@@ -50,39 +50,43 @@ class _HorizontalGenresGridListState extends State<HorizontalGenresGridList> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
-                child: GridView.builder(
-                  controller: scrollController,
-                  scrollDirection: Axis.horizontal,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: Insets.small,
-                    crossAxisSpacing: Insets.small,
-                    childAspectRatio: 2 / 6,
+                child: Semantics(
+                  label: SemanticLabels.genresHorizontalScroll,
+                  child: GridView.builder(
+                    controller: scrollController,
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: Insets.small,
+                      crossAxisSpacing: Insets.small,
+                      childAspectRatio: 2 / 6,
+                    ),
+                    itemCount: state.genres.length,
+                    itemBuilder: (context, index) {
+                      final genre = state.genres[index];
+                      final bool isSelected = genresSelected.contains(genre.id);
+
+                      return SelectableButton(
+                        label: genre.name,
+                        isSelected: isSelected,
+                        onPressed: () {
+                          if (genresSelected.contains(genre.id)) {
+                            genresSelected.remove(genre.id);
+                          } else {
+                            genresSelected.add(genre.id);
+                          }
+                          setState(() {});
+
+                          context
+                              .read<GamesByGenreBloc>()
+                              .add(GetInitialGamesByGenre(
+                                genresIds: genresSelected,
+                              ));
+                        },
+                      );
+                    },
                   ),
-                  itemCount: state.genres.length,
-                  itemBuilder: (context, index) {
-                    final genre = state.genres[index];
-                    final bool isSelected = genresSelected.contains(genre.id);
-
-                    return SelectableButton(
-                      label: genre.name,
-                      isSelected: isSelected,
-                      onPressed: () {
-                        if (genresSelected.contains(genre.id)) {
-                          genresSelected.remove(genre.id);
-                        } else {
-                          genresSelected.add(genre.id);
-                        }
-                        setState(() {});
-
-                        context
-                            .read<GamesByGenreBloc>()
-                            .add(GetInitialGamesByGenre(
-                              genresIds: genresSelected,
-                            ));
-                      },
-                    );
-                  },
                 ),
               ),
               GestureDetector(
@@ -103,6 +107,7 @@ class _HorizontalGenresGridListState extends State<HorizontalGenresGridList> {
                     style: textTheme.labelMedium?.copyWith(
                       color: AppColors.melon,
                     ),
+                    semanticsLabel: SemanticLabels.clearAllButton,
                   ),
                 ),
               ),

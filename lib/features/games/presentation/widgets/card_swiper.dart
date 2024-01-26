@@ -117,77 +117,86 @@ class CardSwiper extends StatelessWidget {
           extra: heroId,
         );
       },
-      child: Hero(
-        tag: heroId,
-        child: AspectRatio(
-          aspectRatio: 16 / 9,
-          child: Stack(
-            children: [
-              SizedBox.expand(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: Insets.xsmall / 2),
-                  child: CachedNetworkImage(
-                    imageUrl: currentGame.backgroundImage,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              const SizedBox.expand(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        AppColors.eerieBlack,
-                      ],
-                      stops: [
-                        0.7,
-                        1.0,
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: SizedBox(
-                  width: screenSize.width,
+      child: Semantics(
+        label: '${SemanticLabels.swipeCard} ${currentGame.name}',
+        child: Hero(
+          tag: heroId,
+          child: AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Stack(
+              children: [
+                SizedBox.expand(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Insets.medium,
-                      vertical: Insets.large,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          currentGame.name,
-                          style: textTheme.headlineLarge,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: AppConstants.commonMaxLines,
-                        ),
-                        const SizedBox(height: Insets.medium),
-                        PlatformsIconRow(
-                          color: AppColors.white.withOpacity(0.7),
-                          platforms: currentGame.platforms,
-                        ),
-                        const SizedBox(height: Insets.medium),
-                        Text(
-                          genres,
-                          style: textTheme.bodyMedium?.copyWith(
-                            color: AppColors.white.withOpacity(0.4),
-                          ),
-                          maxLines: AppConstants.commonMaxLines,
-                        ),
-                      ],
+                    padding: const EdgeInsets.only(bottom: Insets.xsmall / 2),
+                    child: CachedNetworkImage(
+                      imageUrl: currentGame.backgroundImage,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-              ),
-            ],
+                const SizedBox.expand(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          AppColors.eerieBlack,
+                        ],
+                        stops: [
+                          0.7,
+                          1.0,
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned.fill(
+                  child: SizedBox(
+                    width: screenSize.width,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Insets.medium,
+                        vertical: Insets.large,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            currentGame.name,
+                            style: textTheme.headlineLarge,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: AppConstants.commonMaxLines,
+                            semanticsLabel:
+                                '${SemanticLabels.gameName} ${currentGame.name}',
+                          ),
+                          const SizedBox(height: Insets.medium),
+                          Semantics(
+                            label: SemanticLabels.platformIcons,
+                            child: PlatformsIconRow(
+                              color: AppColors.white.withOpacity(0.7),
+                              platforms: currentGame.platforms,
+                            ),
+                          ),
+                          const SizedBox(height: Insets.medium),
+                          Text(
+                            genres,
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: AppColors.white.withOpacity(0.4),
+                            ),
+                            maxLines: AppConstants.commonMaxLines,
+                            semanticsLabel: '${SemanticLabels.genres} $genres',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

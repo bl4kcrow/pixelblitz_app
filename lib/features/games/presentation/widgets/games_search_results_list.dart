@@ -58,59 +58,66 @@ class _GameSearchResultListState extends State<GamesSearchResultList> {
               child: NoDataAnimation(label: Labels.searchAGameMyFriend),
             );
           } else {
-            return ListView.separated(
-              controller: scrollController,
-              itemCount: state.games.length,
-              itemBuilder: (
-                BuildContext context,
-                int index,
-              ) {
-                final Game game = state.games[index];
-                final String heroId = 'searchList-${game.id}';
+            return Semantics(
+              label: SemanticLabels.searchResultList,
+              child: ListView.separated(
+                controller: scrollController,
+                itemCount: state.games.length,
+                itemBuilder: (
+                  BuildContext context,
+                  int index,
+                ) {
+                  final Game game = state.games[index];
+                  final String heroId = 'searchList-${game.id}';
 
-                return ListTile(
-                  leading: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(AppRadius.xsmall),
-                      child: CachedNetworkImage(
-                        imageUrl: game.backgroundImage,
-                        fit: BoxFit.cover,
+                  return ListTile(
+                    leading: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Semantics(
+                        label:
+                            '${index.toString()} ${SemanticLabels.clickcableImage} ${SemanticLabels.gameName} ${game.name}',
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(AppRadius.xsmall),
+                          child: CachedNetworkImage(
+                            imageUrl: game.backgroundImage,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  title: Text(
-                    game.name,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    game.released != null
-                        ? DateFormat.yMMMd().format(game.released!)
-                        : Labels.notApplicable,
-                  ),
-                  visualDensity: const VisualDensity(vertical: 4),
-                  onTap: () {
-                    context.read<GameDetailsBloc>().add(
-                          GetDetails(id: game.id),
-                        );
-                    context
-                        .read<GameScreenshotsBloc>()
-                        .add(GetInitialScreenshots(id: game.id));
-                    context
-                        .read<GameSeriesBloc>()
-                        .add(GetInitialGameSeries(id: game.id));
-                    context.pushNamed(
-                      RoutesName.gameDetailsScreen,
-                      extra: heroId,
-                    );
-                  },
-                );
-              },
-              separatorBuilder: (_, __) {
-                return const SizedBox(
-                  height: Insets.xsmall / 2,
-                );
-              },
+                    title: Text(
+                      game.name,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      game.released != null
+                          ? DateFormat.yMMMd().format(game.released!)
+                          : Labels.notApplicable,
+                    ),
+                    visualDensity: const VisualDensity(vertical: 4),
+                    onTap: () {
+                      context.read<GameDetailsBloc>().add(
+                            GetDetails(id: game.id),
+                          );
+                      context
+                          .read<GameScreenshotsBloc>()
+                          .add(GetInitialScreenshots(id: game.id));
+                      context
+                          .read<GameSeriesBloc>()
+                          .add(GetInitialGameSeries(id: game.id));
+                      context.pushNamed(
+                        RoutesName.gameDetailsScreen,
+                        extra: heroId,
+                      );
+                    },
+                  );
+                },
+                separatorBuilder: (_, __) {
+                  return const SizedBox(
+                    height: Insets.xsmall / 2,
+                  );
+                },
+              ),
             );
           }
         } else {

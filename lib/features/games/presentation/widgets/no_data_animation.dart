@@ -16,20 +16,23 @@ class NoDataAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    return Column(
-      children: [
-        const SizedBox(height: Insets.extraLarge),
-        Lottie.asset(
-          Assets.pacmanGhostsLottie,
-          height: 70.0,
-        ),
-        Text(
-          label,
-          style: textTheme.bodyLarge?.copyWith(
-            color: AppColors.white.withOpacity(0.5),
+    return Semantics(
+      label: '$label ${SemanticLabels.animation}',
+      child: Column(
+        children: [
+          const SizedBox(height: Insets.extraLarge),
+          Lottie.asset(
+            Assets.pacmanGhostsLottie,
+            height: 70.0,
           ),
-        )
-      ],
+          Text(
+            label,
+            style: textTheme.bodyLarge?.copyWith(
+              color: AppColors.white.withOpacity(0.5),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
