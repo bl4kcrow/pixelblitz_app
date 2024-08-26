@@ -11,53 +11,75 @@ import '../../domain/domain.dart';
 import '../presentation.dart';
 
 class GameDetailsScreen extends StatelessWidget {
-  const GameDetailsScreen({
+  GameDetailsScreen({
     super.key,
     required this.heroId,
   });
 
   final String heroId;
 
+  final _pageController = PageController(
+    initialPage: 0,
+  );
+
+  final ScrollController _viewsScrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      body: BlocBuilder<GameDetailsBloc, GameDetailsState>(
-        builder: (context, state) {
-          if (state.requestStatus == GamesRequestStatus.success) {
-            final GameDetails gameDetails = state.gameDetails;
-
-            return CustomScrollView(
-              physics: const ClampingScrollPhysics(),
-              slivers: [
-                SliverPersistentHeader(
-                  pinned: true,
-                  delegate: _SliverHeaderDelegate(
-                    screenSize: screenSize,
-                    gameDetails: gameDetails,
-                    heroId: heroId,
-                  ),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => SizedBox(
-                      height: screenSize.height * 0.6,
-                      child: _GameViews(
-                        gameDetails: gameDetails,
-                      ),
-                    ),
-                    childCount: 1,
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const Center(
-              child: SpinnerIndicator(),
-            );
-          }
+      body: PopScope(
+        onPopInvokedWithResult: (didPop, result) {
+          context.read<GameDetailsChipSelectedCubit>().selectChip(0);
         },
+        child: BlocBuilder<GameDetailsBloc, GameDetailsState>(
+          builder: (context, state) {
+            if (state.requestStatus == GamesRequestStatus.success) {
+              final GameDetails gameDetails = state.gameDetails;
+        
+              return NestedScrollView(
+                controller: _viewsScrollController,
+                physics: const ClampingScrollPhysics(),
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: _SliverHeaderDelegate(
+                      screenSize: screenSize,
+                      gameDetails: gameDetails,
+                      heroId: heroId,
+                    ),
+                  ),
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: _ChipSliverHeaderDelegate(() {
+                      _pageController.jumpToPage(
+                        context.read<GameDetailsChipSelectedCubit>().state,
+                      );
+                      _viewsScrollController.animateTo(
+                        0.0,
+                        duration: const Duration(milliseconds: 30),
+                        curve: Curves.bounceIn,
+                      );
+                    }),
+                  ),
+                ],
+                body: SizedBox(
+                  height: screenSize.height * 0.6,
+                  child: _GameViews(
+                    gameDetails: gameDetails,
+                    pageController: _pageController,
+                    viewsScrollController: _viewsScrollController,
+                  ),
+                ),
+              );
+            } else {
+              return const Center(
+                child: SpinnerIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -66,26 +88,19 @@ class GameDetailsScreen extends StatelessWidget {
 class _GameViews extends StatefulWidget {
   const _GameViews({
     required this.gameDetails,
+    required this.pageController,
+    required this.viewsScrollController,
   });
 
   final GameDetails gameDetails;
+  final PageController pageController;
+  final ScrollController viewsScrollController;
 
   @override
   State<_GameViews> createState() => _GameViewsState();
 }
 
 class _GameViewsState extends State<_GameViews> {
-  final List<String> _chips = [
-    Labels.about,
-    Labels.info,
-    Labels.gameSeries,
-  ];
-  final _pageController = PageController(
-    initialPage: 0,
-  );
-
-  int _chipSelected = 0;
-
   @override
   void initState() {
     super.initState();
@@ -131,7 +146,7 @@ class _GameViewsState extends State<_GameViews> {
 
   @override
   void dispose() {
-    _pageController.dispose();
+    widget.pageController.dispose();
     super.dispose();
   }
 
@@ -144,36 +159,18 @@ class _GameViewsState extends State<_GameViews> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              for (int index = 0; index < _chips.length; index++) ...[
-                ChoiceChip(
-                  label: Text(
-                    _chips[index],
-                    semanticsLabel:
-                        '${_chips[index]} ${SemanticLabels.details} ${SemanticLabels.button}',
-                  ),
-                  selected: _chipSelected == index,
-                  onSelected: (_) {
-                    setState(() {
-                      _chipSelected = index;
-                    });
-                    _pageController.jumpToPage(
-                      _chipSelected,
-                    );
-                  },
-                ),
-                const SizedBox(width: Insets.small),
-              ],
-            ],
-          ),
           const SizedBox(height: Insets.medium),
           Expanded(
             child: PageView(
-              controller: _pageController,
-              onPageChanged: (page) => setState(() {
-                _chipSelected = page;
-              }),
+              controller: widget.pageController,
+              onPageChanged: (page) {
+                context.read<GameDetailsChipSelectedCubit>().selectChip(page);
+                widget.viewsScrollController.animateTo(
+                  0.0,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.bounceIn,
+                );
+              },
               children: [
                 _aboutView(),
                 _infoView(),
@@ -337,6 +334,39 @@ class _GameCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class _ChipSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
+  _ChipSliverHeaderDelegate(this.onSelected);
+
+  final Function()? onSelected;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      color: appTheme.colorScheme.surface,
+      padding: const EdgeInsets.symmetric(
+        horizontal: Insets.medium,
+      ),
+      child: GameDetailsChoiceChips(
+        onSelected: onSelected,
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 45.0;
+
+  @override
+  double get minExtent => 45.0;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
+      false;
 }
 
 class _SliverHeaderDelegate extends SliverPersistentHeaderDelegate {

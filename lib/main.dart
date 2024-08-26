@@ -65,6 +65,10 @@ class App extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) =>
+                GameDetailsChipSelectedCubit(),
+          ),
+          BlocProvider(
+            create: (context) =>
                 GameScreenshotsBloc(context.read<GamesRepositoryImpl>()),
           ),
           BlocProvider(

@@ -1,4 +1,5 @@
 export 'blocs/game_details_bloc/game_details_bloc.dart';
+export 'blocs/game_details_chip_selected_cubit.dart';
 export 'blocs/game_screenshots_bloc/game_screenshots_bloc.dart';
 export 'blocs/game_series_bloc/game_series_bloc.dart';
 export 'blocs/games_by_genre_bloc/games_by_genre_bloc.dart';
@@ -17,6 +18,7 @@ export 'screens/home_screen.dart';
 export 'screens/platforms_screen.dart';
 
 export 'widgets/card_swiper.dart';
+export 'widgets/game_details_choice_chips.dart';
 export 'widgets/game_info_table.dart';
 export 'widgets/game_series_list.dart';
 export 'widgets/games_list.dart';

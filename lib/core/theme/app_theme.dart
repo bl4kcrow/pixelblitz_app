@@ -14,8 +14,6 @@ final appTheme = ThemeData(
     onTertiary: AppColors.white,
     error: AppColors.melon,
     onError: AppColors.bloodRed,
-    background: AppColors.eerieBlack,
-    onBackground: AppColors.white,
     surface: AppColors.eerieBlack,
     onSurface: AppColors.white,
     surfaceTint: AppColors.eerieBlack,

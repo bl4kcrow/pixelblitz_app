@@ -111,23 +111,23 @@ class _SegmentedListsButtonState extends State<SegmentedListsButton> {
                 );
           },
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith(
-              (states) => states.contains(MaterialState.selected)
+            backgroundColor: WidgetStateProperty.resolveWith(
+              (states) => states.contains(WidgetState.selected)
                   ? AppColors.black
                   : AppColors.eerieBlack,
             ),
-            side: MaterialStatePropertyAll(
+            side: WidgetStatePropertyAll(
               BorderSide(
                 color: AppColors.white.withOpacity(0.7),
               ),
             ),
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppRadius.small),
               ),
             ),
-            textStyle: MaterialStateTextStyle.resolveWith(
-              (states) => states.contains(MaterialState.selected)
+            textStyle: WidgetStateTextStyle.resolveWith(
+              (states) => states.contains(WidgetState.selected)
                   ? textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                       foreground: Paint()
