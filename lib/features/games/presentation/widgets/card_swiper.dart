@@ -46,7 +46,7 @@ class _InactiveSwiperLine extends StatelessWidget {
       width: itemSize - Insets.xsmall,
       margin: const EdgeInsets.symmetric(horizontal: Insets.xsmall / 2),
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.5),
+        color: AppColors.white.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(2.0),
       ),
     );
@@ -177,7 +177,7 @@ class CardSwiper extends StatelessWidget {
                           Semantics(
                             label: SemanticLabels.platformIcons,
                             child: PlatformsIconRow(
-                              color: AppColors.white.withOpacity(0.7),
+                              color: AppColors.white.withValues(alpha: 0.7),
                               platforms: currentGame.platforms,
                             ),
                           ),
@@ -185,7 +185,7 @@ class CardSwiper extends StatelessWidget {
                           Text(
                             genres,
                             style: textTheme.bodyMedium?.copyWith(
-                              color: AppColors.white.withOpacity(0.4),
+                              color: AppColors.white.withValues(alpha: 0.4),
                             ),
                             maxLines: AppConstants.commonMaxLines,
                             semanticsLabel: '${SemanticLabels.genres} $genres',

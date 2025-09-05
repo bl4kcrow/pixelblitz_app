@@ -256,7 +256,7 @@ class _GameCard extends StatelessWidget {
                       Semantics(
                         label: SemanticLabels.platformIcons,
                         child: PlatformsIconRow(
-                          color: AppColors.white.withOpacity(0.7),
+                          color: AppColors.white.withValues(alpha: 0.7),
                           platforms: gameDetails.platforms,
                         ),
                       ),
@@ -265,7 +265,7 @@ class _GameCard extends StatelessWidget {
                         Text(
                           developers,
                           style: textTheme.bodyLarge?.copyWith(
-                            color: AppColors.white.withOpacity(0.6),
+                            color: AppColors.white.withValues(alpha: 0.6),
                           ),
                           maxLines: AppConstants.commonMaxLines,
                           overflow: TextOverflow.ellipsis,
@@ -276,7 +276,7 @@ class _GameCard extends StatelessWidget {
                         Text(
                           genres,
                           style: textTheme.bodyMedium?.copyWith(
-                            color: AppColors.white.withOpacity(0.4),
+                            color: AppColors.white.withValues(alpha: 0.4),
                           ),
                           maxLines: AppConstants.commonMaxLines,
                           overflow: TextOverflow.ellipsis,

@@ -112,7 +112,7 @@ class GamesList extends StatelessWidget {
                                 ? 'Release Date: $formatedReleaseDate'
                                 : 'Release Date: ${Labels.notApplicable}',
                             style: textTheme.bodySmall?.copyWith(
-                              color: AppColors.white.withOpacity(0.9),
+                              color: AppColors.white.withValues(alpha: 0.9),
                             ),
                             overflow: TextOverflow.ellipsis,
                             semanticsLabel:
@@ -122,7 +122,7 @@ class GamesList extends StatelessWidget {
                             text: TextSpan(
                               text: '${Labels.metacritic}: ',
                               style: textTheme.bodySmall?.copyWith(
-                                color: AppColors.white.withOpacity(0.9),
+                                color: AppColors.white.withValues(alpha: 0.9),
                               ),
                               children: <TextSpan>[
                                 if (game.metacritic != null) ...[
@@ -131,7 +131,7 @@ class GamesList extends StatelessWidget {
                                     style: textTheme.bodySmall?.copyWith(
                                       color: MetacriticScore.getFromValue(
                                         game.metacritic!,
-                                      ).color.withOpacity(0.9),
+                                      ).color.withValues(alpha: 0.9),
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -148,7 +148,7 @@ class GamesList extends StatelessWidget {
                               Text(
                                 'Rating: ',
                                 style: textTheme.bodySmall?.copyWith(
-                                  color: AppColors.white.withOpacity(0.9),
+                                  color: AppColors.white.withValues(alpha: 0.9),
                                 ),
                                 semanticsLabel:
                                     '${SemanticLabels.metracriticRate} ${game.rating.toStringAsFixed(1)}',
@@ -156,7 +156,8 @@ class GamesList extends StatelessWidget {
                               Expanded(
                                 child: StarRating(
                                   value: game.rating,
-                                  color: AppColors.sunglow.withOpacity(0.9),
+                                  color:
+                                      AppColors.sunglow.withValues(alpha: 0.9),
                                   iconSize: IconSize.small / 2,
                                 ),
                               ),
