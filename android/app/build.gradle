@@ -31,7 +31,7 @@ def keystoreProperties = new Properties()
 android {
     namespace "com.blakcrow.pixelblitz"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion '28.0.13004108'
+    ndkVersion '28.2.13676358'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
