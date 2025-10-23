@@ -28,7 +28,7 @@ class NoDataAnimation extends StatelessWidget {
           Text(
             label,
             style: textTheme.bodyLarge?.copyWith(
-              color: AppColors.white.withOpacity(0.5),
+              color: AppColors.white.withValues(alpha: 0.5),
             ),
           )
         ],

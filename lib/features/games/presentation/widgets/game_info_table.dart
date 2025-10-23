@@ -23,7 +23,7 @@ class GameInfoTable extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: Insets.xsmall),
       child: Text(
         text,
-        style: TextStyle(color: AppColors.white.withOpacity(0.7)),
+        style: TextStyle(color: AppColors.white.withValues(alpha: 0.7)),
       ),
     );
   }

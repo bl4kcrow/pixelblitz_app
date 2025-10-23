@@ -66,12 +66,6 @@ class TopListsBloc extends Bloc<TopListsEvent, TopListsState> {
             page: currentPage,
           );
           break;
-        default:
-          response = await gamesRepository.getPopular(
-            from: event.from,
-            to: event.to,
-            page: currentPage,
-          );
       }
 
       games = response.results as List<Game>;

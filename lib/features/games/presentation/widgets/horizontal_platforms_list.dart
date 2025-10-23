@@ -128,7 +128,8 @@ class _HorizontalPlatformsListState extends State<HorizontalPlatformsList> {
                                       path: platformAssetPath.path,
                                       color: isSelected
                                           ? AppColors.white
-                                          : AppColors.white.withOpacity(0.7),
+                                          : AppColors.white
+                                              .withValues(alpha: 0.7),
                                       iconSize: IconSize.small * 2,
                                     ),
                                   ),

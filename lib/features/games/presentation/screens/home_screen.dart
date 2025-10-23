@@ -195,7 +195,8 @@ class _TopSwiper extends StatelessWidget {
                       child: Row(
                         children: [
                           CircleAvatar(
-                            backgroundColor: AppColors.white.withOpacity(0.8),
+                            backgroundColor:
+                                AppColors.white.withValues(alpha: 0.8),
                             radius: 20,
                             child: IconButton(
                               onPressed: () {
@@ -225,7 +226,7 @@ class _TopSwiper extends StatelessWidget {
                             },
                             icon: FaIcon(
                               FontAwesomeIcons.circleInfo,
-                              color: AppColors.white.withOpacity(0.8),
+                              color: AppColors.white.withValues(alpha: 0.8),
                               size: IconSize.large,
                             ),
                           ),

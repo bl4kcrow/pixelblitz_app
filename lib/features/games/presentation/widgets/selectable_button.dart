@@ -25,7 +25,7 @@ class SelectableButton extends StatelessWidget {
             isSelected ? AppColors.black : AppColors.charlestonGrey,
         side: BorderSide(
           color: isSelected
-              ? AppColors.white.withOpacity(0.7)
+              ? AppColors.white.withValues(alpha: 0.7)
               : AppColors.eerieBlack,
         ),
         shape: RoundedRectangleBorder(
